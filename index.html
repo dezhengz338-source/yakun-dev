@@ -3,398 +3,402 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yakun · 亚坤</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;510;590;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>亚坤 · Yakun — 在噪声中提取信号</title>
+<meta name="description" content="亚坤（Yakun），跨境数字营销与 AI 自动化的独立操盘手。广告投放为核心引擎，号源管理 · 选品套利 · 精准投放 · 支付结算全链路。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF6F0'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23C8401E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
-    --bg-deep: #010102;
-    --bg-page: #08090a;
-    --bg-panel: #0f1011;
-    --bg-surface: #191a1b;
-    --bg-card: rgba(255,255,255,0.02);
-    --bg-hover: rgba(255,255,255,0.04);
-    --text-primary: #f7f8f8;
-    --text-secondary: #d0d6e0;
-    --text-tertiary: #8a8f98;
-    --text-muted: #62666d;
-    --brand: #5e6ad2;
-    --accent: #7170ff;
-    --accent-hover: #828fff;
-    --border-subtle: rgba(255,255,255,0.05);
-    --border-standard: rgba(255,255,255,0.08);
-    --radius-sm: 4px;
-    --radius: 6px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 22px;
+    --paper: #FAF6F0;
+    --ink: #191512;
+    --signal: #C8401E;
+    --muted: #8A8172;
+    --hairline: #E4DDD2;
+    --paper-deep: #F1EAE0;
   }
+
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg-page);
-    color: var(--text-primary);
-    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* ————— 呼吸的信号点（唯一 signature） ————— */
+  .signal {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--signal);
+    display: inline-block;
+    flex-shrink: 0;
+    animation: breathe 3.2s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.55); opacity: 0.55; }
+  }
+
+  /* ————— 顶部 header ————— */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 40px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .topbar .brand {
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+  }
+  .topbar .status {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 40px 24px;
-    font-feature-settings: 'cv01', 'ss03';
+    gap: 9px;
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    letter-spacing: 0.04em;
   }
 
-  .card {
-    width: 100%;
-    max-width: 920px;
-    background: var(--bg-panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: 64px 72px;
-    position: relative;
-    overflow: hidden;
+  /* ————— 主容器（呼吸感：宽留白 + 窄内容栏） ————— */
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 40px;
   }
 
-  /* Ambient glow */
-  .card::before {
-    content: '';
-    position: absolute;
-    top: -150px;
-    right: -150px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(94,106,210,0.06) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
+  /* ————— Hero ————— */
+  .hero {
+    padding: 96px 0 72px;
   }
-
-  .card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(94,106,210,0.2), rgba(113,112,255,0.2), transparent);
-  }
-
-  .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 56px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .name-block h1 {
-    font-size: 48px;
-    font-weight: 510;
-    letter-spacing: -1.056px;
-    line-height: 1;
-    color: var(--text-primary);
-    margin-bottom: 12px;
-  }
-
-  .name-block h1 em {
-    font-style: normal;
-    font-weight: 300;
-    background: linear-gradient(135deg, var(--accent), #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .name-block .role {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--text-tertiary);
-    letter-spacing: -0.165px;
-  }
-
-  .tag-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .tag {
-    padding: 4px 12px;
-    border-radius: 9999px;
-    font-size: 13px;
-    font-weight: 510;
-    border: 1px solid var(--border-subtle);
-    background: transparent;
-    color: var(--text-secondary);
-    letter-spacing: -0.13px;
-  }
-
-  .tag.accent {
-    background: rgba(94,106,210,0.12);
-    border-color: rgba(113,112,255,0.25);
-    color: var(--accent);
-  }
-
-  hr {
-    border: none;
-    height: 1px;
-    background: var(--border-subtle);
-    margin: 40px 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .section {
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 590;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-muted);
+  .hero .kicker {
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+    color: var(--muted);
     margin-bottom: 20px;
+    letter-spacing: 0.02em;
   }
-
-  .bio {
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--text-tertiary);
-    font-weight: 400;
-    max-width: 680px;
-    letter-spacing: -0.1px;
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(64px, 15vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
   }
-
-  .bio mark {
-    background: none;
-    color: var(--text-secondary);
-    font-weight: 510;
+  .hero h1 .en {
+    display: block;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.42em;
+    letter-spacing: 0.01em;
+    color: var(--muted);
+    margin-top: 14px;
   }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .hero .role {
+    font-size: 15px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-top: 1px solid var(--hairline);
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
     gap: 12px;
   }
 
-  .grid-item {
-    padding: 20px 24px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    transition: border-color 0.15s ease, background 0.15s ease;
+  /* ————— 引言（editorial pull-quote） ————— */
+  .lede {
+    padding: 88px 0;
+    border-top: 1px solid var(--hairline);
   }
-
-  .grid-item:hover {
-    border-color: rgba(113,112,255,0.15);
-    background: rgba(113,112,255,0.02);
+  .lede p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 5.5vw, 42px);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
   }
-
-  .grid-item .label {
-    font-size: 11px;
-    font-weight: 590;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    margin-bottom: 10px;
+  .lede p .mark {
+    font-style: italic;
+    color: var(--signal);
   }
-
-  .grid-item .value {
+  .lede .sub {
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
-    color: var(--text-secondary);
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.165px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-top: 36px;
+    max-width: 560px;
   }
+  .lede .sub strong { color: var(--ink); font-weight: 600; }
 
-  .projects {
+  /* ————— 数字 ————— */
+  .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    margin-bottom: 96px;
   }
-
-  .proj-card {
-    padding: 16px 18px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius);
-    transition: border-color 0.15s ease;
+  .stat {
+    background: var(--paper);
+    padding: 32px 20px 28px;
   }
-
-  .proj-card:hover {
-    border-color: rgba(113,112,255,0.15);
+  .stat .num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
-
-  .proj-card .proj-icon { font-size: 16px; margin-bottom: 8px; }
-
-  .proj-card .proj-name {
-    font-size: 14px;
-    font-weight: 590;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-    letter-spacing: -0.182px;
-  }
-
-  .proj-card .proj-desc {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.5;
-    letter-spacing: normal;
-  }
-
-  .contact {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-tertiary);
-    letter-spacing: -0.182px;
-  }
-
-  .contact-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  .footer {
-    margin-top: 48px;
+  .stat .num .plus { color: var(--signal); }
+  .stat .lbl {
+    margin-top: 12px;
     font-size: 11px;
-    font-weight: 510;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--muted);
   }
 
-  @media (max-width: 768px) {
-    .card { padding: 40px 32px; }
-    .header { flex-direction: column; gap: 24px; }
-    .tag-row { justify-content: flex-start; }
-    .name-block h1 { font-size: 36px; letter-spacing: -0.792px; }
-    .grid { grid-template-columns: 1fr; }
-    .projects { grid-template-columns: 1fr 1fr; }
-    .contact { flex-wrap: wrap; gap: 16px; }
+  /* ————— 系统列表 ————— */
+  .systems {
+    margin-bottom: 96px;
+  }
+  .systems .sec-title {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .sys {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: baseline;
+    gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sys:first-of-type { border-top: 1px solid var(--hairline); }
+  .sys .idx {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--muted);
+  }
+  .sys .name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  .sys .desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 5px;
+    line-height: 1.55;
+  }
+  .sys .tag {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: var(--signal);
+    white-space: nowrap;
   }
 
-  @media (max-width: 480px) {
-    .card { padding: 32px 20px; border-radius: var(--radius-lg); }
-    .name-block h1 { font-size: 28px; letter-spacing: -0.616px; }
-    .projects { grid-template-columns: 1fr; }
-    .bio { font-size: 15px; }
+  /* ————— 联系 ————— */
+  .connect {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    margin-bottom: 96px;
+  }
+  .conn {
+    background: var(--paper);
+    padding: 36px 32px;
+  }
+  .conn .qr {
+    width: 108px;
+    height: auto;
+    background: #fff;
+    padding: 5px;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .conn .lbl {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .conn .val {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .conn .val a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--signal);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .conn .val a:hover { color: var(--signal); }
+  .conn .sub-val {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ————— Footer ————— */
+  footer {
+    border-top: 1px solid var(--hairline);
+    padding: 28px 40px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  footer .live {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ————— 响应式 ————— */
+  @media (max-width: 640px) {
+    .topbar { padding: 22px 20px; }
+    .wrap { padding: 0 20px; }
+    .hero { padding: 64px 0 56px; }
+    .hero h1 { font-size: clamp(56px, 20vw, 96px); }
+    .lede { padding: 64px 0; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .sys { grid-template-columns: 36px 1fr; }
+    .sys .tag { grid-column: 2; margin-top: -10px; }
+    .connect { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px 32px; flex-direction: column; gap: 12px; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
-<div class="card">
 
-  <div class="header">
-    <div class="name-block">
-      <h1>亚坤 <em>·</em> Yakun</h1>
-      <div class="role">Performance Marketer &amp; AI Systems Architect</div>
-    </div>
-    <div class="tag-row">
-      <span class="tag accent">Meta Ads</span>
-      <span class="tag accent">TikTok Ads</span>
-      <span class="tag">AI Agent</span>
-      <span class="tag">Growth</span>
-    </div>
-  </div>
+<header class="topbar">
+  <a class="brand" href="/">YAKUN.DEV</a>
+  <span class="status"><span class="signal"></span>在线 · 信号</span>
+</header>
 
-  <div class="section">
-    <div class="section-label">About</div>
-    <div class="bio">
-      跨境数字营销与AI自动化交叉领域的<mark>独立操盘手</mark>。以广告投放为核心引擎，打通<mark>号源管理 → 选品套利 → 精准投放 → 支付结算</mark>全链路。擅长在高噪声信息环境中提取信号，用AI替代重复劳动。不是看机会的人，是让机会跑起来的人。
-    </div>
-  </div>
+<div class="wrap">
 
-  <hr>
+  <section class="hero">
+    <div class="kicker">Performance Marketer &amp; AI Systems Architect</div>
+    <h1>亚坤<span class="en">Yakun</span></h1>
+    <div class="role"><span class="signal"></span>广告投放 · 号源管理 · 选品套利 · 支付结算</div>
+  </section>
 
-  <div class="grid">
-    <div class="grid-item">
-      <div class="label">Core Competency</div>
-      <div class="value">Facebook / TikTok 广告投放<br>号源与账户矩阵管理<br>跨境选品与ROI优化</div>
+  <section class="lede">
+    <p>在高噪声的信息环境里，提取那个决定胜负的<span class="mark">信号</span>。</p>
+    <div class="sub">
+      跨境数字营销与 AI 自动化的<strong>独立操盘手</strong>。以广告投放为核心引擎，打通<strong>号源管理 → 选品套利 → 精准投放 → 支付结算</strong>全链路。用 AI 替代重复劳动，不是看机会的人，是让机会跑起来的人。
     </div>
-    <div class="grid-item">
-      <div class="label">Tech Stack</div>
-      <div class="value">Hermes Agent · Codex · DeepSeek<br>Python · Node.js · FastAPI<br>AI自动化工作流搭建</div>
-    </div>
-    <div class="grid-item">
-      <div class="label">Infrastructure</div>
-      <div class="value">VCC虚拟卡支付通道<br>SMS接码与账户验证<br>广告资产与BM管理</div>
-    </div>
-    <div class="grid-item">
-      <div class="label">Location</div>
-      <div class="value">贵阳 · 中国<br>远程 · 全球市场</div>
-    </div>
-  </div>
+  </section>
 
-  <hr>
+  <section class="stats">
+    <div class="stat"><div class="num">70<span class="plus">+</span></div><div class="lbl">广告账户</div></div>
+    <div class="stat"><div class="num">150</div><div class="lbl">选品组</div></div>
+    <div class="stat"><div class="num">22K</div><div class="lbl">买家数据库</div></div>
+    <div class="stat"><div class="num">6</div><div class="lbl">活跃系统</div></div>
+  </section>
 
-  <div class="section">
-    <div class="section-label">Systems &amp; Projects</div>
-    <div class="projects">
-      <div class="proj-card">
-        <div class="proj-icon">🎯</div>
-        <div class="proj-name">AI 选品引擎</div>
-        <div class="proj-desc">微信社群实时监控 + DeepSeek评分，自动化投放选品决策</div>
+  <section class="systems">
+    <div class="sec-title">Deployed Systems · 已上线系统</div>
+
+    <div class="sys">
+      <div class="idx">01</div>
+      <div><div class="name">AI 选品引擎</div><div class="desc">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div>
+      <div class="tag">信号源</div>
+    </div>
+
+    <div class="sys">
+      <div class="idx">02</div>
+      <div><div class="name">Lead Scout</div><div class="desc">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div>
+      <div class="tag">获客</div>
+    </div>
+
+    <div class="sys">
+      <div class="idx">03</div>
+      <div><div class="name">LuPan 律盘</div><div class="desc">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div>
+      <div class="tag">律所工具</div>
+    </div>
+
+    <div class="sys">
+      <div class="idx">04</div>
+      <div><div class="name">Skill Radar</div><div class="desc">AI 技能生态监控，46 个活跃技能实时追踪</div></div>
+      <div class="tag">生态雷达</div>
+    </div>
+
+    <div class="sys">
+      <div class="idx">05</div>
+      <div><div class="name">飞书桥接</div><div class="desc">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div>
+      <div class="tag">消息中枢</div>
+    </div>
+
+    <div class="sys">
+      <div class="idx">06</div>
+      <div><div class="name">WeFlow Pipeline</div><div class="desc">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div>
+      <div class="tag">数据管道</div>
+    </div>
+  </section>
+
+  <section class="connect">
+    <div class="conn">
+      <img class="qr" src="qr.png" alt="微信二维码">
+      <div class="lbl">WeChat</div>
+      <div class="val">dezheng284851</div>
+    </div>
+    <div class="conn">
+      <div class="lbl" style="margin-top:8px">X / Twitter</div>
+      <div class="val"><a href="https://x.com/zhoudezheng0101" target="_blank" rel="noopener">@zhoudezheng0101</a></div>
+      <div class="sub-val" style="margin-top:28px">
+        <div class="lbl">Domain</div>
+        <div class="val">yakun.dev</div>
       </div>
-      <div class="proj-card">
-        <div class="proj-icon">🔍</div>
-        <div class="proj-name">Lead Scout</div>
-        <div class="proj-desc">22K买家数据库，FastAPI + SPA外贸获客系统</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon">⚖️</div>
-        <div class="proj-name">LuPan 律盘</div>
-        <div class="proj-desc">DeepSeek AI法律助手，案件分析 + 文书起草</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon">📡</div>
-        <div class="proj-name">Skill Radar</div>
-        <div class="proj-desc">AI技能生态监控，46个活跃技能实时追踪</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon">🔄</div>
-        <div class="proj-name">飞书桥接</div>
-        <div class="proj-desc">微信→飞书消息同步，Hermes Agent智能回复</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon">📊</div>
-        <div class="proj-name">WeFlow 部署</div>
-        <div class="proj-desc">微信4.x数据管道，实时解密 + HTTP API + SSE</div>
-      </div>
     </div>
-  </div>
-
-  <hr>
-
-  <div class="contact">
-    <div class="contact-item">
-      <span class="contact-dot"></span>
-      <span>WeChat · dezheng284851</span>
-    </div>
-    <div class="contact-item">
-      <span class="contact-dot"></span>
-      <span>Performance Marketing &amp; AI Automation</span>
-    </div>
-  </div>
-
-  <div class="footer">
-    Built with AI · Driven by Data
-  </div>
+  </section>
 
 </div>
+
+<footer>
+  <span>YAKUN · 亚坤</span>
+  <span class="live"><span class="signal"></span><span id="live-time"></span></span>
+  <span>SIGNAL FOUND IN NOISE</span>
+</footer>
+
+<script>
+(function tick() {
+  var now = new Date();
+  var t = now.toLocaleTimeString('zh-CN', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
+  var el = document.getElementById('live-time');
+  if (el) el.textContent = 'GMT+8 ' + t + ' · ONLINE';
+  setTimeout(tick, 1000);
+})();
+</script>
+
 </body>
 </html>
