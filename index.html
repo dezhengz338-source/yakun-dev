@@ -1,39 +1,59 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>亚坤 · Yakun — 在噪声中提取信号</title>
+<title>亚坤 · Yakun — 昼夜不息的信号</title>
 <meta name="description" content="亚坤（Yakun），跨境数字营销与 AI 自动化的独立操盘手。广告投放为核心引擎，号源管理 · 选品套利 · 精准投放 · 支付结算全链路。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF6F0'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23C8401E'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23C8401E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
+  /* ————— 主题变量：白天（默认） ————— */
   :root {
-    --paper: #FAF6F0;
+    --bg: #FAF6F0;
     --ink: #191512;
     --signal: #C8401E;
     --muted: #8A8172;
     --hairline: #E4DDD2;
-    --paper-deep: #F1EAE0;
+    --particle-rgb: 198, 148, 78;      /* 白天：暖金尘埃 */
+    --transition: 0.8s;
+  }
+  /* ————— 黑夜 ————— */
+  [data-theme="dark"] {
+    --bg: #0A0E15;
+    --ink: #E7E1D6;
+    --signal: #FF5A3C;
+    --muted: #7C8598;
+    --hairline: rgba(255,255,255,0.08);
+    --particle-rgb: 150, 175, 225;     /* 黑夜：冷蓝星点 */
   }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    transition: background var(--transition) ease, color var(--transition) ease;
   }
 
-  /* ————— 呼吸的信号点（唯一 signature） ————— */
+  /* ————— 漂浮粒子场（"整个空间动起来"） ————— */
+  #space {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ————— 呼吸的信号点（唯一 signature，昼夜不息） ————— */
   .signal {
     width: 9px; height: 9px;
     border-radius: 50%;
@@ -41,21 +61,25 @@
     display: inline-block;
     flex-shrink: 0;
     animation: breathe 3.2s ease-in-out infinite;
+    box-shadow: 0 0 0 0 var(--signal);
   }
   @keyframes breathe {
     0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(0.55); opacity: 0.55; }
+    50% { transform: scale(0.5); opacity: 0.5; }
   }
 
-  /* ————— 顶部 header ————— */
+  /* ————— 顶部 header + 主题切换 ————— */
   .topbar {
+    position: relative;
+    z-index: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 40px;
+    padding: 26px 40px;
     font-size: 13px;
     letter-spacing: 0.08em;
     color: var(--muted);
+    transition: color var(--transition) ease;
   }
   .topbar .brand {
     font-weight: 600;
@@ -72,17 +96,48 @@
     letter-spacing: 0.04em;
   }
 
-  /* ————— 主容器（呼吸感：宽留白 + 窄内容栏） ————— */
+  .theme-toggle {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 7px 14px 7px 12px;
+    cursor: pointer;
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .theme-toggle:hover { border-color: var(--signal); color: var(--ink); }
+  .theme-toggle .icon { font-size: 14px; line-height: 1; }
+
+  /* ————— 主容器 ————— */
   .wrap {
+    position: relative;
+    z-index: 1;
     max-width: 760px;
     margin: 0 auto;
     padding: 0 40px;
   }
 
-  /* ————— Hero ————— */
-  .hero {
-    padding: 96px 0 72px;
+  /* ————— 滚动淡入 ————— */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
   }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ————— Hero ————— */
+  .hero { padding: 88px 0 68px; }
   .hero .kicker {
     font-family: 'Caveat', cursive;
     font-size: 21px;
@@ -111,19 +166,16 @@
     font-size: 15px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink);
     border-top: 1px solid var(--hairline);
     padding-top: 24px;
     display: flex;
     align-items: center;
     gap: 12px;
+    transition: border-color var(--transition) ease;
   }
 
-  /* ————— 引言（editorial pull-quote） ————— */
-  .lede {
-    padding: 88px 0;
-    border-top: 1px solid var(--hairline);
-  }
+  /* ————— 引言 ————— */
+  .lede { padding: 84px 0; border-top: 1px solid var(--hairline); transition: border-color var(--transition) ease; }
   .lede p {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 500;
@@ -131,10 +183,7 @@
     line-height: 1.35;
     letter-spacing: -0.01em;
   }
-  .lede p .mark {
-    font-style: italic;
-    color: var(--signal);
-  }
+  .lede p .mark { font-style: italic; color: var(--signal); }
   .lede .sub {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
@@ -153,11 +202,9 @@
     background: var(--hairline);
     border: 1px solid var(--hairline);
     margin-bottom: 96px;
+    transition: background var(--transition) ease, border-color var(--transition) ease;
   }
-  .stat {
-    background: var(--paper);
-    padding: 32px 20px 28px;
-  }
+  .stat { background: var(--bg); padding: 32px 20px 28px; transition: background var(--transition) ease; }
   .stat .num {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 600;
@@ -175,9 +222,7 @@
   }
 
   /* ————— 系统列表 ————— */
-  .systems {
-    margin-bottom: 96px;
-  }
+  .systems { margin-bottom: 96px; }
   .systems .sec-title {
     font-family: 'Caveat', cursive;
     font-size: 22px;
@@ -191,31 +236,13 @@
     gap: 20px;
     padding: 28px 0;
     border-bottom: 1px solid var(--hairline);
+    transition: border-color var(--transition) ease;
   }
   .sys:first-of-type { border-top: 1px solid var(--hairline); }
-  .sys .idx {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    color: var(--muted);
-  }
-  .sys .name {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 1.15;
-  }
-  .sys .desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 5px;
-    line-height: 1.55;
-  }
-  .sys .tag {
-    font-family: 'Caveat', cursive;
-    font-size: 17px;
-    color: var(--signal);
-    white-space: nowrap;
-  }
+  .sys .idx { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--muted); }
+  .sys .name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 24px; line-height: 1.15; }
+  .sys .desc { font-size: 13px; color: var(--muted); margin-top: 5px; line-height: 1.55; }
+  .sys .tag { font-family: 'Caveat', cursive; font-size: 17px; color: var(--signal); white-space: nowrap; }
 
   /* ————— 联系 ————— */
   .connect {
@@ -225,30 +252,12 @@
     background: var(--hairline);
     border: 1px solid var(--hairline);
     margin-bottom: 96px;
+    transition: background var(--transition) ease, border-color var(--transition) ease;
   }
-  .conn {
-    background: var(--paper);
-    padding: 36px 32px;
-  }
-  .conn .qr {
-    width: 108px;
-    height: auto;
-    background: #fff;
-    padding: 5px;
-    display: block;
-    margin-bottom: 16px;
-  }
-  .conn .lbl {
-    font-family: 'Caveat', cursive;
-    font-size: 18px;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-  .conn .val {
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-  }
+  .conn { background: var(--bg); padding: 36px 32px; transition: background var(--transition) ease; }
+  .conn .qr { width: 108px; height: auto; background: #fff; padding: 5px; display: block; margin-bottom: 16px; }
+  .conn .lbl { font-family: 'Caveat', cursive; font-size: 18px; color: var(--muted); margin-bottom: 6px; }
+  .conn .val { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; }
   .conn .val a {
     color: var(--ink);
     text-decoration: none;
@@ -256,14 +265,12 @@
     transition: color 0.2s, border-color 0.2s;
   }
   .conn .val a:hover { color: var(--signal); }
-  .conn .sub-val {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
+  .conn .sub-val { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
   /* ————— Footer ————— */
   footer {
+    position: relative;
+    z-index: 1;
     border-top: 1px solid var(--hairline);
     padding: 28px 40px 40px;
     display: flex;
@@ -272,101 +279,80 @@
     font-size: 12px;
     letter-spacing: 0.1em;
     color: var(--muted);
+    transition: border-color var(--transition) ease;
   }
-  footer .live {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-family: 'Caveat', cursive;
-    font-size: 16px;
-    letter-spacing: 0.04em;
-  }
+  footer .live { display: flex; align-items: center; gap: 9px; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 0.04em; }
 
   /* ————— 响应式 ————— */
   @media (max-width: 640px) {
     .topbar { padding: 22px 20px; }
     .wrap { padding: 0 20px; }
-    .hero { padding: 64px 0 56px; }
+    .hero { padding: 60px 0 52px; }
     .hero h1 { font-size: clamp(56px, 20vw, 96px); }
-    .lede { padding: 64px 0; }
+    .lede { padding: 60px 0; }
     .stats { grid-template-columns: 1fr 1fr; }
     .sys { grid-template-columns: 36px 1fr; }
     .sys .tag { grid-column: 2; margin-top: -10px; }
     .connect { grid-template-columns: 1fr; }
     footer { padding: 24px 20px 32px; flex-direction: column; gap: 12px; align-items: flex-start; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    #space { display: none; }
+    .signal { animation: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
 
+<canvas id="space"></canvas>
+
 <header class="topbar">
   <a class="brand" href="/">YAKUN.DEV</a>
-  <span class="status"><span class="signal"></span>在线 · 信号</span>
+  <div style="display:flex; align-items:center; gap:18px;">
+    <span class="status"><span class="signal"></span>在线 · 信号</span>
+    <button class="theme-toggle" id="themeBtn" aria-label="切换昼夜模式">
+      <span class="icon" id="themeIcon">☀️</span>
+      <span id="themeLabel">自动</span>
+    </button>
+  </div>
 </header>
 
 <div class="wrap">
 
-  <section class="hero">
+  <section class="hero reveal">
     <div class="kicker">Performance Marketer &amp; AI Systems Architect</div>
     <h1>亚坤<span class="en">Yakun</span></h1>
     <div class="role"><span class="signal"></span>广告投放 · 号源管理 · 选品套利 · 支付结算</div>
   </section>
 
-  <section class="lede">
+  <section class="lede reveal">
     <p>在高噪声的信息环境里，提取那个决定胜负的<span class="mark">信号</span>。</p>
     <div class="sub">
       跨境数字营销与 AI 自动化的<strong>独立操盘手</strong>。以广告投放为核心引擎，打通<strong>号源管理 → 选品套利 → 精准投放 → 支付结算</strong>全链路。用 AI 替代重复劳动，不是看机会的人，是让机会跑起来的人。
     </div>
   </section>
 
-  <section class="stats">
+  <section class="stats reveal">
     <div class="stat"><div class="num">70<span class="plus">+</span></div><div class="lbl">广告账户</div></div>
     <div class="stat"><div class="num">150</div><div class="lbl">选品组</div></div>
     <div class="stat"><div class="num">22K</div><div class="lbl">买家数据库</div></div>
     <div class="stat"><div class="num">6</div><div class="lbl">活跃系统</div></div>
   </section>
 
-  <section class="systems">
+  <section class="systems reveal">
     <div class="sec-title">Deployed Systems · 已上线系统</div>
 
-    <div class="sys">
-      <div class="idx">01</div>
-      <div><div class="name">AI 选品引擎</div><div class="desc">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div>
-      <div class="tag">信号源</div>
-    </div>
-
-    <div class="sys">
-      <div class="idx">02</div>
-      <div><div class="name">Lead Scout</div><div class="desc">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div>
-      <div class="tag">获客</div>
-    </div>
-
-    <div class="sys">
-      <div class="idx">03</div>
-      <div><div class="name">LuPan 律盘</div><div class="desc">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div>
-      <div class="tag">律所工具</div>
-    </div>
-
-    <div class="sys">
-      <div class="idx">04</div>
-      <div><div class="name">Skill Radar</div><div class="desc">AI 技能生态监控，46 个活跃技能实时追踪</div></div>
-      <div class="tag">生态雷达</div>
-    </div>
-
-    <div class="sys">
-      <div class="idx">05</div>
-      <div><div class="name">飞书桥接</div><div class="desc">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div>
-      <div class="tag">消息中枢</div>
-    </div>
-
-    <div class="sys">
-      <div class="idx">06</div>
-      <div><div class="name">WeFlow Pipeline</div><div class="desc">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div>
-      <div class="tag">数据管道</div>
-    </div>
+    <div class="sys"><div class="idx">01</div><div><div class="name">AI 选品引擎</div><div class="desc">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div><div class="tag">信号源</div></div>
+    <div class="sys"><div class="idx">02</div><div><div class="name">Lead Scout</div><div class="desc">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div><div class="tag">获客</div></div>
+    <div class="sys"><div class="idx">03</div><div><div class="name">LuPan 律盘</div><div class="desc">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div><div class="tag">律所工具</div></div>
+    <div class="sys"><div class="idx">04</div><div><div class="name">Skill Radar</div><div class="desc">AI 技能生态监控，46 个活跃技能实时追踪</div></div><div class="tag">生态雷达</div></div>
+    <div class="sys"><div class="idx">05</div><div><div class="name">飞书桥接</div><div class="desc">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div><div class="tag">消息中枢</div></div>
+    <div class="sys"><div class="idx">06</div><div><div class="name">WeFlow Pipeline</div><div class="desc">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div><div class="tag">数据管道</div></div>
   </section>
 
-  <section class="connect">
+  <section class="connect reveal">
     <div class="conn">
       <img class="qr" src="qr.png" alt="微信二维码">
       <div class="lbl">WeChat</div>
@@ -391,6 +377,136 @@
 </footer>
 
 <script>
+/* ============ 1. 昼夜主题系统 ============ */
+(function () {
+  var KEY = 'yakun-theme';            // 'auto' | 'light' | 'dark'
+  var mode = localStorage.getItem(KEY) || 'auto';
+  var root = document.documentElement;
+
+  function localIsNight() {
+    var h = new Date().getHours();
+    return h < 6 || h >= 18;           // 6:00–18:00 白天，其余黑夜
+  }
+
+  function resolve(m) {
+    if (m === 'light') return 'light';
+    if (m === 'dark') return 'dark';
+    return localIsNight() ? 'dark' : 'light';   // auto → 跟随时间
+  }
+
+  function apply() {
+    var t = resolve(mode);
+    root.setAttribute('data-theme', t);
+    // 更新按钮文案
+    var icon = document.getElementById('themeIcon');
+    var label = document.getElementById('themeLabel');
+    if (mode === 'auto') { icon.textContent = '🌓'; label.textContent = '自动'; }
+    else if (mode === 'light') { icon.textContent = '☀️'; label.textContent = '白天'; }
+    else { icon.textContent = '🌙'; label.textContent = '黑夜'; }
+    // 通知粒子系统主题
+    window.__theme = t;
+  }
+
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    // 循环：auto → light → dark → auto
+    mode = mode === 'auto' ? 'light' : (mode === 'light' ? 'dark' : 'auto');
+    localStorage.setItem(KEY, mode);
+    apply();
+  });
+
+  // auto 模式下每 30 秒检查一次时间（跨 6点/18点 自动切换）
+  setInterval(function () {
+    if (mode === 'auto') apply();
+  }, 30000);
+
+  apply();
+})();
+
+/* ============ 2. 漂浮粒子场 ============ */
+(function () {
+  var canvas = document.getElementById('space');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var rgb = '198, 148, 78';            // 默认白天暖金
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    init();
+  }
+
+  function init() {
+    var w = window.innerWidth, h = window.innerHeight;
+    var count = Math.min(90, Math.max(30, Math.floor(w * h / 22000)));
+    particles = [];
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.8 + 0.8,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28,
+        a: Math.random() * 0.35 + 0.1,
+        tw: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function readTheme() {
+    // 从 CSS 变量读粒子色（白天暖金 / 黑夜冷蓝）
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--particle-rgb').trim();
+    if (v) rgb = v;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.tw += 0.012;
+      if (p.x < -12) p.x = window.innerWidth + 12;
+      if (p.x > window.innerWidth + 12) p.x = -12;
+      if (p.y < -12) p.y = window.innerHeight + 12;
+      if (p.y > window.innerHeight + 12) p.y = -12;
+      var alpha = p.a * (0.55 + 0.45 * Math.sin(p.tw));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + rgb + ',' + alpha.toFixed(3) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  // 主题切换时更新粒子色
+  var obs = new MutationObserver(function () {
+    readTheme();
+  });
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  resize();
+  readTheme();
+  draw();
+})();
+
+/* ============ 3. 滚动淡入 ============ */
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+})();
+
+/* ============ 4. 实时时钟 ============ */
 (function tick() {
   var now = new Date();
   var t = now.toLocaleTimeString('zh-CN', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
