@@ -528,7 +528,22 @@
         <textarea rows="3" name="requirements" data-i18n-ph="form.req.ph" placeholder="简单说说您的产品和目标市场"></textarea>
         <input type="hidden" name="_subject" value="新询盘 · yakun.dev">
         <button type="submit" class="btn btn-primary" style="margin-top:20px; width:100%; justify-content:center; font-family:inherit;" data-i18n="form.submit">提交 — 获取免费出海方案</button>
-        <div id="form-status" style="display:none; margin-top:14px; font-size:14px; font-weight:600; color:#4ade80;"></div>
+        <div id="form-success" style="display:none; text-align:center; padding:18px 0;">
+          <div style="width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:#34d399;display:flex;align-items:center;justify-content:center;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A1622" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div id="fr-ok-title" style="font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;">提交成功</div>
+          <p id="fr-ok-desc" style="color:var(--muted);font-size:14px;margin:0;">我们会在 24 小时内联系您。</p>
+        </div>
+        <div id="form-error" style="display:none; text-align:center; padding:18px 0;">
+          <div style="width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:#f87171;display:flex;align-items:center;justify-content:center;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A1622" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div id="fr-err-title" style="font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;">抱歉，提交失败</div>
+          <p id="fr-err-desc" style="color:var(--muted);font-size:14px;margin:0 0 18px;">请直接添加微信，我们一对一沟通。</p>
+          <img src="qr.png" alt="微信二维码" style="width:160px;height:auto;border-radius:10px;margin:0 auto 14px;display:block;">
+          <div style="font-weight:600;font-size:14px;color:var(--ink);">微信：dezheng284851</div>
+        </div>
       </form>
       <div class="contact-card">
         <div class="cc-item">
@@ -778,8 +793,24 @@ var META = {
 (function () {
   var form = document.getElementById('contact-form');
   if (!form) return;
-  var status = document.getElementById('form-status');
+  var success = document.getElementById('form-success');
+  var error = document.getElementById('form-error');
   var isEn = function () { return document.documentElement.lang === 'en'; };
+
+  function showResult(type) {
+    Array.prototype.forEach.call(form.children, function (child) {
+      if (child !== success && child !== error) child.style.display = 'none';
+    });
+    success.style.display = type === 'success' ? 'block' : 'none';
+    error.style.display = type === 'error' ? 'block' : 'none';
+  }
+
+  function showError() {
+    document.getElementById('fr-err-title').textContent = isEn() ? 'Sorry, submission failed' : '抱歉，提交失败';
+    document.getElementById('fr-err-desc').textContent = isEn() ? 'Please add us on WeChat and we\'ll talk one-on-one.' : '请直接添加微信，我们一对一沟通。';
+    showResult('error');
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = form.querySelector('button[type="submit"]');
@@ -789,21 +820,15 @@ var META = {
       body: new FormData(form),
       headers: { 'Accept': 'application/json' }
     }).then(function (res) {
-      status.style.display = 'block';
       if (res.ok) {
-        status.style.color = '#4ade80';
-        status.textContent = isEn() ? '✓ Received — we\'ll contact you within 24 hours' : '✓ 已收到，24 小时内联系您';
-        form.reset();
+        document.getElementById('fr-ok-title').textContent = isEn() ? 'Submitted' : '提交成功';
+        document.getElementById('fr-ok-desc').textContent = isEn() ? 'We will contact you within 24 hours.' : '我们会在 24 小时内联系您。';
+        showResult('success');
       } else {
-        status.style.color = '#f87171';
-        status.textContent = isEn() ? 'Submission failed — please add WeChat: dezheng284851' : '提交失败，请直接加微信 dezheng284851';
+        showError();
       }
     }).catch(function () {
-      status.style.display = 'block';
-      status.style.color = '#f87171';
-      status.textContent = isEn() ? 'Submission failed — please add WeChat: dezheng284851' : '提交失败，请直接加微信 dezheng284851';
-    }).finally(function () {
-      btn.disabled = false;
+      showError();
     });
   });
 })();
