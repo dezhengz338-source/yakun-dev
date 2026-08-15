@@ -507,27 +507,29 @@
       <p class="sec-desc" data-i18n="contact.desc">填写表单或扫码，24 小时内提供免费出海策略评估。</p>
     </div>
     <div class="contact-grid">
-      <div class="contact-form">
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/mrpzazoz" method="POST">
         <label data-i18n="form.name">您的姓名 *</label>
-        <input type="text" data-i18n-ph="form.name.ph" placeholder="怎么称呼您">
+        <input type="text" name="name" required data-i18n-ph="form.name.ph" placeholder="怎么称呼您">
         <label data-i18n="form.industry">所在行业 *</label>
-        <select>
-          <option data-i18n="form.industry.ph">选择您的行业</option>
-          <option data-i18n="form.ind1">五金工具</option>
-          <option data-i18n="form.ind2">电子产品</option>
-          <option data-i18n="form.ind3">户外用品</option>
-          <option data-i18n="form.ind4">纺织服装</option>
-          <option data-i18n="form.ind5">家具</option>
-          <option data-i18n="form.ind6">建材</option>
-          <option data-i18n="form.ind7">机械设备</option>
-          <option data-i18n="form.ind8">其他</option>
+        <select name="industry">
+          <option value="" data-i18n="form.industry.ph">选择您的行业</option>
+          <option value="Hardware & Tools" data-i18n="form.ind1">五金工具</option>
+          <option value="Electronics" data-i18n="form.ind2">电子产品</option>
+          <option value="Outdoor Goods" data-i18n="form.ind3">户外用品</option>
+          <option value="Textiles & Apparel" data-i18n="form.ind4">纺织服装</option>
+          <option value="Furniture" data-i18n="form.ind5">家具</option>
+          <option value="Building Materials" data-i18n="form.ind6">建材</option>
+          <option value="Machinery" data-i18n="form.ind7">机械设备</option>
+          <option value="Other" data-i18n="form.ind8">其他</option>
         </select>
         <label data-i18n="form.contact">联系方式 *</label>
-        <input type="text" data-i18n-ph="form.contact.ph" placeholder="微信 / WhatsApp / 电话">
+        <input type="text" name="contact" required data-i18n-ph="form.contact.ph" placeholder="微信 / WhatsApp / 电话">
         <label data-i18n="form.req">需求描述（可选）</label>
-        <textarea rows="3" data-i18n-ph="form.req.ph" placeholder="简单说说您的产品和目标市场"></textarea>
-        <a class="btn btn-primary" href="#contact" style="margin-top:20px; width:100%; justify-content:center;" data-i18n="form.submit">提交 — 获取免费出海方案</a>
-      </div>
+        <textarea rows="3" name="requirements" data-i18n-ph="form.req.ph" placeholder="简单说说您的产品和目标市场"></textarea>
+        <input type="hidden" name="_subject" value="新询盘 · yakun.dev">
+        <button type="submit" class="btn btn-primary" style="margin-top:20px; width:100%; justify-content:center; font-family:inherit;" data-i18n="form.submit">提交 — 获取免费出海方案</button>
+        <div id="form-status" style="display:none; margin-top:14px; font-size:14px; font-weight:600; color:#4ade80;"></div>
+      </form>
       <div class="contact-card">
         <div class="cc-item">
           <div class="cc-lbl" data-i18n="contact.wa">WhatsApp（推荐）</div>
@@ -770,6 +772,40 @@ var META = {
       else { apply(navLang()); }     // IP 定位失败，浏览器语言兜底
     });
   })();
+})();
+
+/* ============ 表单 AJAX 提交 ============ */
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var status = document.getElementById('form-status');
+  var isEn = function () { return document.documentElement.lang === 'en'; };
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      status.style.display = 'block';
+      if (res.ok) {
+        status.style.color = '#4ade80';
+        status.textContent = isEn() ? '✓ Received — we\'ll contact you within 24 hours' : '✓ 已收到，24 小时内联系您';
+        form.reset();
+      } else {
+        status.style.color = '#f87171';
+        status.textContent = isEn() ? 'Submission failed — please add WeChat: dezheng284851' : '提交失败，请直接加微信 dezheng284851';
+      }
+    }).catch(function () {
+      status.style.display = 'block';
+      status.style.color = '#f87171';
+      status.textContent = isEn() ? 'Submission failed — please add WeChat: dezheng284851' : '提交失败，请直接加微信 dezheng284851';
+    }).finally(function () {
+      btn.disabled = false;
+    });
+  });
 })();
 </script>
 
