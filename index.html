@@ -1,520 +1,773 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>亚坤 · Yakun — 昼夜不息的信号</title>
-<meta name="description" content="亚坤（Yakun），跨境数字营销与 AI 自动化的独立操盘手。广告投放为核心引擎，号源管理 · 选品套利 · 精准投放 · 支付结算全链路。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23C8401E'/%3E%3C/svg%3E">
+<title>亞坤跨境 Yakun — 中国工厂 Facebook/TikTok 广告投放出海</title>
+<meta name="description" content="亞坤跨境为外贸工厂提供 Facebook/TikTok 广告精准投放、社媒代运营、全球获客一站式出海方案。150+ 工厂验证，单条询盘低至 ¥0.29。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A1622'/%3E%3Cpath d='M9 22 L23 10 M9 22 L23 22 M9 10 L23 10' stroke='%23E8552A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-  /* ————— 主题变量：白天（默认） ————— */
   :root {
-    --bg: #FAF6F0;
-    --ink: #191512;
-    --signal: #C8401E;
-    --muted: #8A8172;
-    --hairline: #E4DDD2;
-    --particle-rgb: 198, 148, 78;      /* 白天：暖金尘埃 */
-    --transition: 0.8s;
-  }
-  /* ————— 黑夜 ————— */
-  [data-theme="dark"] {
-    --bg: #0A0E15;
-    --ink: #E7E1D6;
-    --signal: #FF5A3C;
-    --muted: #7C8598;
+    --bg: #0A1622;
+    --bg-deep: #081018;
+    --surface: #0F1E2E;
+    --ink: #F2F4F7;
+    --muted: #93A0B4;
+    --accent: #E8552A;
+    --accent-dim: rgba(232,85,42,0.14);
     --hairline: rgba(255,255,255,0.08);
-    --particle-rgb: 150, 175, 225;     /* 黑夜：冷蓝星点 */
+    --radius: 10px;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Barlow', 'Noto Sans SC', system-ui, sans-serif;
     background: var(--bg);
     color: var(--ink);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
     overflow-x: hidden;
-    transition: background var(--transition) ease, color var(--transition) ease;
   }
 
-  /* ————— 漂浮粒子场（"整个空间动起来"） ————— */
-  #space {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
+  .condensed {
+    font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif;
+    text-transform: uppercase;
   }
 
-  /* ————— 呼吸的信号点（唯一 signature，昼夜不息） ————— */
-  .signal {
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    background: var(--signal);
-    display: inline-block;
-    flex-shrink: 0;
-    animation: breathe 3.2s ease-in-out infinite;
-    box-shadow: 0 0 0 0 var(--signal);
-  }
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(0.5); opacity: 0.5; }
-  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
 
-  /* ————— 顶部 header + 主题切换 ————— */
-  .topbar {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 26px 40px;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    transition: color var(--transition) ease;
-  }
-  .topbar .brand {
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: 0.12em;
-    text-decoration: none;
-  }
-  .topbar .status {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-family: 'Caveat', cursive;
-    font-size: 16px;
-    letter-spacing: 0.04em;
-  }
-
-  .theme-toggle {
-    position: relative;
-    z-index: 2;
-    display: flex;
+  /* ————— 按钮 ————— */
+  .btn {
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: transparent;
-    border: 1px solid var(--hairline);
-    border-radius: 999px;
-    padding: 7px 14px 7px 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
     cursor: pointer;
-    font-family: 'Caveat', cursive;
-    font-size: 15px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    transition: border-color 0.3s, color 0.3s;
+    border: none;
+    transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s;
+    white-space: nowrap;
   }
-  .theme-toggle:hover { border-color: var(--signal); color: var(--ink); }
-  .theme-toggle .icon { font-size: 14px; line-height: 1; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #f06438; transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* ————— 主容器 ————— */
-  .wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 40px;
+  /* ————— Header ————— */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(8,16,24,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--hairline);
   }
-
-  /* ————— 滚动淡入 ————— */
-  .reveal {
-    opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ————— Hero ————— */
-  .hero { padding: 88px 0 68px; }
-  .hero .kicker {
-    font-family: 'Caveat', cursive;
-    font-size: 21px;
-    color: var(--muted);
-    margin-bottom: 20px;
-    letter-spacing: 0.02em;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(64px, 15vw, 132px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-  }
-  .hero h1 .en {
-    display: block;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 0.42em;
-    letter-spacing: 0.01em;
-    color: var(--muted);
-    margin-top: 14px;
-  }
-  .hero .role {
-    font-size: 15px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    border-top: 1px solid var(--hairline);
-    padding-top: 24px;
+  .nav {
     display: flex;
     align-items: center;
-    gap: 12px;
-    transition: border-color var(--transition) ease;
+    justify-content: space-between;
+    height: 68px;
   }
-
-  /* ————— 引言 ————— */
-  .lede { padding: 84px 0; border-top: 1px solid var(--hairline); transition: border-color var(--transition) ease; }
-  .lede p {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+  .logo {
+    font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .logo .cn { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    font-size: 14px;
     font-weight: 500;
-    font-size: clamp(28px, 5.5vw, 42px);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-  }
-  .lede p .mark { font-style: italic; color: var(--signal); }
-  .lede .sub {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    line-height: 1.9;
     color: var(--muted);
-    margin-top: 36px;
-    max-width: 560px;
+    text-decoration: none;
+    transition: color 0.2s;
   }
-  .lede .sub strong { color: var(--ink); font-weight: 600; }
+  .nav-links a:hover { color: var(--ink); }
 
-  /* ————— 数字 ————— */
-  .stats {
+  /* ————— Hero ————— */
+  .hero { padding: 96px 0 72px; position: relative; }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(232,85,42,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero .tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif;
+    font-weight: 800;
+    font-size: clamp(44px, 7vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero h1 .hl { color: var(--accent); }
+  .hero .sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 640px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .hero .cta-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+
+  .hero-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1px;
     background: var(--hairline);
     border: 1px solid var(--hairline);
-    margin-bottom: 96px;
-    transition: background var(--transition) ease, border-color var(--transition) ease;
+    border-radius: var(--radius);
+    overflow: hidden;
   }
-  .stat { background: var(--bg); padding: 32px 20px 28px; transition: background var(--transition) ease; }
-  .stat .num {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(36px, 5vw, 52px);
+  .hstat { background: var(--surface); padding: 24px; }
+  .hstat .num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
     line-height: 1;
-    letter-spacing: -0.01em;
+    color: var(--ink);
   }
-  .stat .num .plus { color: var(--signal); }
-  .stat .lbl {
-    margin-top: 12px;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+  .hstat .num span { color: var(--accent); }
+  .hstat .lbl { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
-  /* ————— 系统列表 ————— */
-  .systems { margin-bottom: 96px; }
-  .systems .sec-title {
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    color: var(--muted);
-    margin-bottom: 28px;
+  /* ————— 通用 section ————— */
+  section { padding: 72px 0; }
+  .sec-head { margin-bottom: 48px; }
+  .sec-kicker {
+    font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
-  .sys {
-    display: grid;
-    grid-template-columns: 56px 1fr auto;
-    align-items: baseline;
-    gap: 20px;
-    padding: 28px 0;
+  .sec-title {
+    font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .sec-desc { color: var(--muted); margin-top: 14px; max-width: 600px; }
+
+  /* ————— 痛点 ————— */
+  .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .pain {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+  }
+  .pain .icon { font-size: 28px; margin-bottom: 16px; }
+  .pain h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .pain p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ————— 服务 ————— */
+  .services { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .service {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+  }
+  .service .s-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+  .service h3 { font-size: 22px; font-weight: 700; }
+  .service .metric {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--accent);
+    text-align: right;
+    line-height: 1;
+  }
+  .service .metric small { font-size: 14px; color: var(--muted); display: block; }
+  .service p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .service ul { list-style: none; }
+  .service li {
+    font-size: 14px;
+    color: var(--ink);
+    padding: 9px 0;
     border-bottom: 1px solid var(--hairline);
-    transition: border-color var(--transition) ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .sys:first-of-type { border-top: 1px solid var(--hairline); }
-  .sys .idx { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--muted); }
-  .sys .name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 24px; line-height: 1.15; }
-  .sys .desc { font-size: 13px; color: var(--muted); margin-top: 5px; line-height: 1.55; }
-  .sys .tag { font-family: 'Caveat', cursive; font-size: 17px; color: var(--signal); white-space: nowrap; }
+  .service li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* ————— 系统背书 ————— */
+  .sys-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .sys-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+  }
+  .sys-card .name { font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+  .sys-card .desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  /* ————— 案例 ————— */
+  .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .case {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .case .c-industry { font-size: 12px; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 8px; }
+  .case h4 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .case .c-factory { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .case .c-result {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--accent);
+    padding-top: 14px;
+    border-top: 1px solid var(--hairline);
+  }
+  .case .c-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+
+  /* ————— 评价 ————— */
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .review {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .review .quote { font-size: 14px; color: var(--ink); line-height: 1.8; flex: 1; }
+  .review .who { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+  .review .who .name { font-weight: 700; font-size: 14px; }
+  .review .who .role { font-size: 12px; color: var(--muted); }
+  .review .result { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+
+  /* ————— 数据带 ————— */
+  .band { background: var(--bg-deep); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 56px 32px; }
+  .band .b-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(40px, 6vw, 64px);
+    color: var(--accent);
+    line-height: 1;
+  }
+  .band .b-lbl { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+  /* ————— 定价 ————— */
+  .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .plan {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .plan.hot { border-color: var(--accent); }
+  .plan .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+  }
+  .plan h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .plan .p-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+  .plan .price { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 44px; line-height: 1; margin-bottom: 4px; }
+  .plan .price small { font-size: 16px; color: var(--muted); font-weight: 600; }
+  .plan ul { list-style: none; margin: 20px 0; flex: 1; }
+  .plan li { font-size: 13px; color: var(--muted); padding: 6px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .plan li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+  /* ————— 关于 ————— */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+  .about-grid p { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 18px; }
+  .about-grid p strong { color: var(--ink); }
+  .journey { border-left: 2px solid var(--hairline); padding-left: 24px; }
+  .journey .j-item { padding: 10px 0; }
+  .journey .j-year { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; color: var(--accent); }
+  .journey .j-text { font-size: 14px; color: var(--muted); }
 
   /* ————— 联系 ————— */
-  .connect {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--hairline);
+  .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+  .contact-form {
+    background: var(--surface);
     border: 1px solid var(--hairline);
-    margin-bottom: 96px;
-    transition: background var(--transition) ease, border-color var(--transition) ease;
+    border-radius: var(--radius);
+    padding: 36px 32px;
   }
-  .conn { background: var(--bg); padding: 36px 32px; transition: background var(--transition) ease; }
-  .conn .qr { width: 108px; height: auto; background: #fff; padding: 5px; display: block; margin-bottom: 16px; }
-  .conn .lbl { font-family: 'Caveat', cursive; font-size: 18px; color: var(--muted); margin-bottom: 6px; }
-  .conn .val { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; }
-  .conn .val a {
+  .contact-form label { display: block; font-size: 13px; font-weight: 600; margin: 16px 0 6px; }
+  .contact-form input, .contact-form select, .contact-form textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--hairline);
+    border-radius: 6px;
+    padding: 12px 14px;
     color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--signal);
-    transition: color 0.2s, border-color 0.2s;
+    font-size: 14px;
+    font-family: inherit;
   }
-  .conn .val a:hover { color: var(--signal); }
-  .conn .sub-val { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .contact-card .cc-item { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+  .contact-card .cc-item:last-child { border-bottom: none; }
+  .contact-card .cc-lbl { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .contact-card .cc-val { font-size: 16px; font-weight: 700; }
+  .contact-card .cc-val a { color: var(--accent); text-decoration: none; }
+  .contact-card .qr { width: 140px; height: auto; background: #fff; padding: 6px; border-radius: 6px; margin-top: 16px; }
 
   /* ————— Footer ————— */
   footer {
-    position: relative;
-    z-index: 1;
+    background: var(--bg-deep);
     border-top: 1px solid var(--hairline);
-    padding: 28px 40px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    transition: border-color var(--transition) ease;
+    padding: 56px 0 40px;
   }
-  footer .live { display: flex; align-items: center; gap: 9px; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 0.04em; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .foot-grid h5 { font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+  .foot-grid a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 5px 0; }
+  .foot-grid a:hover { color: var(--accent); }
+  .foot-grid .f-brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; margin-bottom: 12px; }
+  .foot-grid .f-desc { font-size: 13px; color: var(--muted); max-width: 320px; line-height: 1.7; }
+  .copyright {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+  }
 
   /* ————— 响应式 ————— */
-  @media (max-width: 640px) {
-    .topbar { padding: 22px 20px; }
-    .wrap { padding: 0 20px; }
-    .hero { padding: 60px 0 52px; }
-    .hero h1 { font-size: clamp(56px, 20vw, 96px); }
-    .lede { padding: 60px 0; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .sys { grid-template-columns: 36px 1fr; }
-    .sys .tag { grid-column: 2; margin-top: -10px; }
-    .connect { grid-template-columns: 1fr; }
-    footer { padding: 24px 20px 32px; flex-direction: column; gap: 12px; align-items: flex-start; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .pains { grid-template-columns: 1fr; }
+    .services { grid-template-columns: 1fr; }
+    .sys-grid { grid-template-columns: 1fr 1fr; }
+    .cases { grid-template-columns: 1fr; }
+    .reviews { grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .band .wrap { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 1fr; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    #space { display: none; }
-    .signal { animation: none; }
-    .reveal { opacity: 1; transform: none; }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 20px; }
+    .hero { padding: 60px 0 48px; }
+    .hero h1 { font-size: 40px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .sys-grid { grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<canvas id="space"></canvas>
-
-<header class="topbar">
-  <a class="brand" href="/">YAKUN.DEV</a>
-  <div style="display:flex; align-items:center; gap:18px;">
-    <span class="status"><span class="signal"></span>在线 · 信号</span>
-    <button class="theme-toggle" id="themeBtn" aria-label="切换昼夜模式">
-      <span class="icon" id="themeIcon">☀️</span>
-      <span id="themeLabel">自动</span>
-    </button>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><span class="cn">亞坤跨境</span> YAKUN</a>
+    <nav class="nav-links">
+      <a href="#services">服务</a>
+      <a href="#cases">案例</a>
+      <a href="#pricing">定价</a>
+      <a href="#about">关于</a>
+      <a href="#contact">联系</a>
+      <a class="btn btn-primary" href="#contact" style="padding:10px 20px; font-size:13px;">免费咨询</a>
+    </nav>
   </div>
 </header>
 
-<div class="wrap">
-
-  <section class="hero reveal">
-    <div class="kicker">Performance Marketer &amp; AI Systems Architect</div>
-    <h1>亚坤<span class="en">Yakun</span></h1>
-    <div class="role"><span class="signal"></span>广告投放 · 号源管理 · 选品套利 · 支付结算</div>
-  </section>
-
-  <section class="lede reveal">
-    <p>在高噪声的信息环境里，提取那个决定胜负的<span class="mark">信号</span>。</p>
-    <div class="sub">
-      跨境数字营销与 AI 自动化的<strong>独立操盘手</strong>。以广告投放为核心引擎，打通<strong>号源管理 → 选品套利 → 精准投放 → 支付结算</strong>全链路。用 AI 替代重复劳动，不是看机会的人，是让机会跑起来的人。
+<section class="hero">
+  <div class="wrap">
+    <div class="tagline">● 150+ 中国工厂验证的出海方案</div>
+    <h1>连接中国制造<br><span class="hl">到全球买家</span></h1>
+    <p class="sub">一站式外贸出海营销方案。Facebook / TikTok 广告精准投放、社媒代运营、全球获客——让你的产品出现在国际买家面前。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">获取免费出海方案 →</a>
+      <a class="btn btn-ghost" href="#cases">查看成功案例</a>
     </div>
-  </section>
-
-  <section class="stats reveal">
-    <div class="stat"><div class="num">70<span class="plus">+</span></div><div class="lbl">广告账户</div></div>
-    <div class="stat"><div class="num">150</div><div class="lbl">选品组</div></div>
-    <div class="stat"><div class="num">22K</div><div class="lbl">买家数据库</div></div>
-    <div class="stat"><div class="num">6</div><div class="lbl">活跃系统</div></div>
-  </section>
-
-  <section class="systems reveal">
-    <div class="sec-title">Deployed Systems · 已上线系统</div>
-
-    <div class="sys"><div class="idx">01</div><div><div class="name">AI 选品引擎</div><div class="desc">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div><div class="tag">信号源</div></div>
-    <div class="sys"><div class="idx">02</div><div><div class="name">Lead Scout</div><div class="desc">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div><div class="tag">获客</div></div>
-    <div class="sys"><div class="idx">03</div><div><div class="name">LuPan 律盘</div><div class="desc">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div><div class="tag">律所工具</div></div>
-    <div class="sys"><div class="idx">04</div><div><div class="name">Skill Radar</div><div class="desc">AI 技能生态监控，46 个活跃技能实时追踪</div></div><div class="tag">生态雷达</div></div>
-    <div class="sys"><div class="idx">05</div><div><div class="name">飞书桥接</div><div class="desc">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div><div class="tag">消息中枢</div></div>
-    <div class="sys"><div class="idx">06</div><div><div class="name">WeFlow Pipeline</div><div class="desc">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div><div class="tag">数据管道</div></div>
-  </section>
-
-  <section class="connect reveal">
-    <div class="conn">
-      <img class="qr" src="qr.png" alt="微信二维码">
-      <div class="lbl">WeChat</div>
-      <div class="val">dezheng284851</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="num">138<span>%</span></div><div class="lbl">平均 ROI 提升</div></div>
+      <div class="hstat"><div class="num">150<span>+</span></div><div class="lbl">服务工厂</div></div>
+      <div class="hstat"><div class="num">30<span>+</span></div><div class="lbl">覆盖海外市场</div></div>
+      <div class="hstat"><div class="num">¥0.29</div><div class="lbl">最低单条询盘成本</div></div>
     </div>
-    <div class="conn">
-      <div class="lbl" style="margin-top:8px">X / Twitter</div>
-      <div class="val"><a href="https://x.com/zhoudezheng0101" target="_blank" rel="noopener">@zhoudezheng0101</a></div>
-      <div class="sub-val" style="margin-top:28px">
-        <div class="lbl">Domain</div>
-        <div class="val">yakun.dev</div>
+  </div>
+</section>
+
+<section id="pains" style="background:var(--bg-deep);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">工厂出海的三大挑战</div>
+      <div class="sec-title">你是否正被这些问题困住？</div>
+      <p class="sec-desc">中国工厂出海，往往卡在这三个环节。亞坤跨境，全部替你解决。</p>
+    </div>
+    <div class="pains">
+      <div class="pain">
+        <div class="icon">🌐</div>
+        <h3>语言障碍</h3>
+        <p>产品很好，但语言不通，无法触达海外买家。我们的多语团队替你搞定所有海外沟通。</p>
+      </div>
+      <div class="pain">
+        <div class="icon">📉</div>
+        <h3>没有流量</h3>
+        <p>展会贵、B2B 平台挤。Facebook / TikTok 广告用最低的获客成本，精准触达全球买家。</p>
+      </div>
+      <div class="pain">
+        <div class="icon">🔄</div>
+        <h3>转化率低</h3>
+        <p>有流量不成交。我们懂海外买家的决策心理，用专业内容和再营销把流量变成真实订单。</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">核心服务</div>
+      <div class="sec-title">完整的出海营销方案</div>
+      <p class="sec-desc">从广告投放到社媒运营，覆盖你全球扩张的每一个环节。</p>
+    </div>
+    <div class="services">
+      <div class="service">
+        <div class="s-top">
+          <h3>FB / TikTok 精准投放</h3>
+          <div class="metric">65%<small>获客成本降低</small></div>
+        </div>
+        <p>每一分广告费都精准投向潜在买家。深谙外贸行业与投放经验，为工厂客户定制投放策略——从受众定向到创意制作，全程优化 ROI。</p>
+        <ul>
+          <li>精准定向 — 触达全球买家与进口商</li>
+          <li>专业创意 — 图文视频广告内部制作</li>
+          <li>持续优化 — 数据驱动策略调整</li>
+          <li>多平台覆盖 — Facebook / Instagram / TikTok</li>
+        </ul>
+      </div>
+      <div class="service">
+        <div class="s-top">
+          <h3>海外社媒代运营</h3>
+          <div class="metric">2000+<small>月均粉丝增长</small></div>
+        </div>
+        <p>从零搭建海外社媒阵地。通过持续优质内容和粉丝互动，在目标市场建立信任与认知，让买家主动找上门。</p>
+        <ul>
+          <li>账号搭建优化 — 专业品牌形象</li>
+          <li>内容策略 — 面向海外买家的内容矩阵</li>
+          <li>粉丝增长 — 精准获客与互动</li>
+          <li>数据报告 — 每月详细效果复盘</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="systems" style="background:var(--bg-deep);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">技术底座 · 自研系统</div>
+      <div class="sec-title">AI 中台驱动的投放能力</div>
+      <p class="sec-desc">操盘手 + AI 自动化，把重复劳动交给系统，把时间留给策略。</p>
+    </div>
+    <div class="sys-grid">
+      <div class="sys-card"><div class="name">AI 选品引擎</div><div class="desc">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div>
+      <div class="sys-card"><div class="name">Lead Scout</div><div class="desc">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div>
+      <div class="sys-card"><div class="name">LuPan 律盘</div><div class="desc">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div>
+      <div class="sys-card"><div class="name">Skill Radar</div><div class="desc">AI 技能生态监控，46 个活跃技能实时追踪</div></div>
+      <div class="sys-card"><div class="name">飞书桥接</div><div class="desc">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div>
+      <div class="sys-card"><div class="name">WeFlow Pipeline</div><div class="desc">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">真实案例截图</div>
+      <div class="sec-title">他们都已经成功出海</div>
+      <p class="sec-desc">真实截图、真实数据，以下是部分客户成功案例。</p>
+    </div>
+    <div class="cases">
+      <div class="case">
+        <div class="c-industry">办公家具制造</div>
+        <h4>广东办公家具厂 — 单日 100 条询盘</h4>
+        <div class="c-factory">Future Fenlon Office Furniture · 📍 广东佛山</div>
+        <p class="c-desc">主要生产办公桌椅、员工桌等，通过 Facebook 广告精准触达印度采购商，实现低成本高质量询盘。</p>
+        <div class="c-result">单日 100 条询盘 · 单次 ¥0.29 · 总花费 ¥29.26 · 目标印度</div>
+      </div>
+      <div class="case">
+        <div class="c-industry">激光设备制造</div>
+        <h4>深圳激光设备厂 — 成本降低 19%</h4>
+        <div class="c-factory">📍 深圳</div>
+        <p class="c-desc">工业设备以前觉得 Facebook 广告是卖消费品的，试了之后广告成本比预期低 19%，每月稳定海外询盘。</p>
+        <div class="c-result">广告成本降低 19% · 稳定月询盘</div>
+      </div>
+      <div class="case">
+        <div class="c-industry">沙发制造</div>
+        <h4>广东沙发厂 — ¥1.75/条询盘</h4>
+        <div class="c-factory">📍 广东</div>
+        <p class="c-desc">从账号建立、素材制作到广告优化全包，每月几百块广告费带来上百条消息对话。</p>
+        <div class="c-result">¥1.75/条询盘 · 上百条消息对话</div>
+      </div>
+      <div class="case">
+        <div class="c-industry">门窗制造</div>
+        <h4>广东门窗厂 — 触达高端买家</h4>
+        <div class="c-factory">📍 广东</div>
+        <p class="c-desc">轻奢门窗产品通过视频广告精准触达海外设计师和高端装修公司，询盘质量更高、预算更大。</p>
+        <div class="c-result">精准触达高端买家 · 更高预算</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <div><div class="b-num">150+</div><div class="b-lbl">服务工厂</div></div>
+    <div><div class="b-num">98%</div><div class="b-lbl">客户满意度</div></div>
+    <div><div class="b-num">30+</div><div class="b-lbl">覆盖市场</div></div>
+    <div><div class="b-num">320%</div><div class="b-lbl">平均 ROI 提升</div></div>
+  </div>
 </div>
 
+<section id="reviews" style="background:var(--bg-deep);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">客户评价</div>
+      <div class="sec-title">他们怎么说</div>
+      <p class="sec-desc">来自真实工厂合作伙伴的反馈。</p>
+    </div>
+    <div class="reviews">
+      <div class="review">
+        <div class="result">单日 100 条询盘</div>
+        <div class="quote">"之前完全不懂外语，也不知道怎么找海外买家。亞坤帮我们搭建了 Facebook 主页，第一个月就有 100 多条询盘进来，印度客户直接在 WhatsApp 问要整箱货，太惊喜了！"</div>
+        <div class="who"><div class="name">陈老板</div><div class="role">广东办公家具厂 · 工厂负责人</div></div>
+      </div>
+      <div class="review">
+        <div class="result">广告成本降低 19%</div>
+        <div class="quote">"我们做工业设备的，以前觉得 Facebook 广告是卖消费品的。亞坤说服我试了，结果广告成本比预期低 19%，现在每个月都有稳定的海外询盘。"</div>
+        <div class="who"><div class="name">李厂长</div><div class="role">深圳激光设备厂</div></div>
+      </div>
+      <div class="review">
+        <div class="result">粉丝增长至 6,428</div>
+        <div class="quote">"我们做包装材料的，通过亞坤的 Facebook 运营，粉丝从 0 涨到 6000 多，现在很多海外客户主动私信询问合作。"</div>
+        <div class="who"><div class="name">刘老板</div><div class="role">广东包装厂</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">服务套餐</div>
+      <div class="sec-title">选择你的出海方案</div>
+      <p class="sec-desc">透明定价，无隐藏费用。所有套餐含专业服务，按月订阅，随时取消。</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h4>Ads Starter</h4>
+        <div class="p-sub">工厂出海起步</div>
+        <div class="price">$499<small>/月</small></div>
+        <ul>
+          <li>Facebook/Instagram 广告投放</li>
+          <li>广告预算管理（至 $500）</li>
+          <li>基础创意（3 组广告）</li>
+          <li>每周效果报告</li>
+          <li>微信/WhatsApp 支持</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">咨询</a>
+      </div>
+      <div class="plan hot">
+        <div class="badge">最受欢迎</div>
+        <h4>Ads Pro</h4>
+        <div class="p-sub">多平台覆盖，ROI 最大化</div>
+        <div class="price">$999<small>/月</small></div>
+        <ul>
+          <li>Facebook + TikTok 双平台</li>
+          <li>广告预算管理（至 $2,000）</li>
+          <li>专业创意（10 组广告）</li>
+          <li>精准定向 + 再营销</li>
+          <li>周报 + 月度策略会</li>
+          <li>询盘跟进协助 + 专属顾问</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact">咨询</a>
+      </div>
+      <div class="plan">
+        <h4>Social Media</h4>
+        <div class="p-sub">搭建海外社媒阵地</div>
+        <div class="price">$799<small>/月</small></div>
+        <ul>
+          <li>Facebook 主页 + Instagram 运营</li>
+          <li>每月 20 条原创内容</li>
+          <li>粉丝互动管理</li>
+          <li>品牌形象优化</li>
+          <li>月度分析报告 + 竞品分析</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">咨询</a>
+      </div>
+      <div class="plan">
+        <h4>Full Export</h4>
+        <div class="p-sub">广告 + 社媒 · 最完整方案</div>
+        <div class="price">$1,599<small>/月</small></div>
+        <ul>
+          <li>Ads Pro 全部功能</li>
+          <li>社媒代运营全部功能</li>
+          <li>优先排期 + 专属策略师</li>
+          <li>每月 2 次策略会</li>
+          <li>落地页优化 + WhatsApp 商务搭建</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">咨询</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--bg-deep);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">关于亞坤</div>
+      <div class="sec-title">专注工厂出海的操盘手</div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p><strong>亞坤跨境（Yakun Transnational）</strong> 专注中国制造工厂的海外数字营销。创始团队出身外贸一线，深谙工厂出海的语言障碍、文化差异与市场认知缺口。</p>
+        <p>核心成员持 Facebook / TikTok 广告认证，在五金、电子、户外用品、纺织等制造垂直领域有大量实操案例。<strong>我们不只投广告——我们是你的海外市场开发合伙人。</strong></p>
+        <p>跨境数字营销与 AI 自动化的独立操盘手，打通<strong>号源管理 → 选品套利 → 精准投放 → 支付结算</strong>全链路，用 AI 替代重复劳动。</p>
+      </div>
+      <div class="journey">
+        <div class="j-item"><div class="j-year">2019</div><div class="j-text">亞坤跨境成立，专注外贸工厂出海服务</div></div>
+        <div class="j-item"><div class="j-year">2020</div><div class="j-text">完成首批 20 家工厂客户服务</div></div>
+        <div class="j-item"><div class="j-year">2021</div><div class="j-text">拓展 TikTok 广告业务，客户突破 50 家</div></div>
+        <div class="j-item"><div class="j-year">2022</div><div class="j-text">推出社媒代运营套餐，服务体系完善</div></div>
+        <div class="j-item"><div class="j-year">2023</div><div class="j-text">服务工厂超 100 家，累计询盘 10000+</div></div>
+        <div class="j-item"><div class="j-year">2024</div><div class="j-text">服务客户 150+ 家，覆盖 30+ 海外市场</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">联系我们</div>
+      <div class="sec-title">开启你的全球扩张</div>
+      <p class="sec-desc">填写表单或扫码，24 小时内提供免费出海策略评估。</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form">
+        <label>您的姓名 *</label>
+        <input type="text" placeholder="怎么称呼您">
+        <label>所在行业 *</label>
+        <select>
+          <option>选择您的行业</option>
+          <option>五金工具</option>
+          <option>电子产品</option>
+          <option>户外用品</option>
+          <option>纺织服装</option>
+          <option>家具</option>
+          <option>建材</option>
+          <option>机械设备</option>
+          <option>其他</option>
+        </select>
+        <label>联系方式 *</label>
+        <input type="text" placeholder="微信 / WhatsApp / 电话">
+        <label>需求描述（可选）</label>
+        <textarea rows="3" placeholder="简单说说您的产品和目标市场"></textarea>
+        <a class="btn btn-primary" href="#contact" style="margin-top:20px; width:100%; justify-content:center;">提交 — 获取免费出海方案</a>
+      </div>
+      <div class="contact-card">
+        <div class="cc-item">
+          <div class="cc-lbl">WhatsApp（推荐）</div>
+          <div class="cc-val"><a href="https://wa.me/8613285287302" target="_blank" rel="noopener">+86 132 8528 7302</a></div>
+        </div>
+        <div class="cc-item">
+          <div class="cc-lbl">微信 WeChat</div>
+          <div class="cc-val">dezheng284851</div>
+        </div>
+        <div class="cc-item">
+          <div class="cc-lbl">域名</div>
+          <div class="cc-val">yakun.dev</div>
+        </div>
+        <div class="cc-item">
+          <div class="cc-lbl">扫码加微信，最快响应</div>
+          <img class="qr" src="qr.png" alt="微信二维码">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <span>YAKUN · 亚坤</span>
-  <span class="live"><span class="signal"></span><span id="live-time"></span></span>
-  <span>SIGNAL FOUND IN NOISE</span>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="f-brand"><span style="color:var(--accent)">亞坤跨境</span> YAKUN</div>
+        <div class="f-desc">Connecting Chinese Manufacturing to Global Markets · 让中国制造无缝连接全球买家。</div>
+      </div>
+      <div>
+        <h5>服务</h5>
+        <a href="#services">FB/TK 广告投放</a>
+        <a href="#services">社媒代运营</a>
+        <a href="#cases">成功案例</a>
+        <a href="#pricing">服务套餐</a>
+      </div>
+      <div>
+        <h5>联系</h5>
+        <a href="https://wa.me/8613285287302" target="_blank" rel="noopener">WhatsApp: +86 132 8528 7302</a>
+        <a href="#contact">微信：dezheng284851</a>
+        <a href="#about">关于亞坤</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Yakun Transnational. All rights reserved. · 专注工厂出海 · 让中国制造走向全球</div>
+  </div>
 </footer>
-
-<script>
-/* ============ 1. 昼夜主题系统 ============ */
-(function () {
-  var KEY = 'yakun-theme';            // 'auto' | 'light' | 'dark'
-  var mode = localStorage.getItem(KEY) || 'auto';
-  var root = document.documentElement;
-
-  function localIsNight() {
-    var h = new Date().getHours();
-    return h < 6 || h >= 18;           // 6:00–18:00 白天，其余黑夜
-  }
-
-  function resolve(m) {
-    if (m === 'light') return 'light';
-    if (m === 'dark') return 'dark';
-    return localIsNight() ? 'dark' : 'light';   // auto → 跟随时间
-  }
-
-  function apply() {
-    var t = resolve(mode);
-    root.setAttribute('data-theme', t);
-    // 更新按钮文案
-    var icon = document.getElementById('themeIcon');
-    var label = document.getElementById('themeLabel');
-    if (mode === 'auto') { icon.textContent = '🌓'; label.textContent = '自动'; }
-    else if (mode === 'light') { icon.textContent = '☀️'; label.textContent = '白天'; }
-    else { icon.textContent = '🌙'; label.textContent = '黑夜'; }
-    // 通知粒子系统主题
-    window.__theme = t;
-  }
-
-  document.getElementById('themeBtn').addEventListener('click', function () {
-    // 循环：auto → light → dark → auto
-    mode = mode === 'auto' ? 'light' : (mode === 'light' ? 'dark' : 'auto');
-    localStorage.setItem(KEY, mode);
-    apply();
-  });
-
-  // auto 模式下每 30 秒检查一次时间（跨 6点/18点 自动切换）
-  setInterval(function () {
-    if (mode === 'auto') apply();
-  }, 30000);
-
-  apply();
-})();
-
-/* ============ 2. 漂浮粒子场 ============ */
-(function () {
-  var canvas = document.getElementById('space');
-  var ctx = canvas.getContext('2d');
-  var particles = [];
-  var rgb = '198, 148, 78';            // 默认白天暖金
-
-  function resize() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    init();
-  }
-
-  function init() {
-    var w = window.innerWidth, h = window.innerHeight;
-    var count = Math.min(90, Math.max(30, Math.floor(w * h / 22000)));
-    particles = [];
-    for (var i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.8 + 0.8,
-        vx: (Math.random() - 0.5) * 0.28,
-        vy: (Math.random() - 0.5) * 0.28,
-        a: Math.random() * 0.35 + 0.1,
-        tw: Math.random() * Math.PI * 2
-      });
-    }
-  }
-
-  function readTheme() {
-    // 从 CSS 变量读粒子色（白天暖金 / 黑夜冷蓝）
-    var v = getComputedStyle(document.documentElement).getPropertyValue('--particle-rgb').trim();
-    if (v) rgb = v;
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.tw += 0.012;
-      if (p.x < -12) p.x = window.innerWidth + 12;
-      if (p.x > window.innerWidth + 12) p.x = -12;
-      if (p.y < -12) p.y = window.innerHeight + 12;
-      if (p.y > window.innerHeight + 12) p.y = -12;
-      var alpha = p.a * (0.55 + 0.45 * Math.sin(p.tw));
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + rgb + ',' + alpha.toFixed(3) + ')';
-      ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', resize);
-  // 主题切换时更新粒子色
-  var obs = new MutationObserver(function () {
-    readTheme();
-  });
-  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-  resize();
-  readTheme();
-  draw();
-})();
-
-/* ============ 3. 滚动淡入 ============ */
-(function () {
-  var els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { threshold: 0.12 });
-  els.forEach(function (e) { io.observe(e); });
-})();
-
-/* ============ 4. 实时时钟 ============ */
-(function tick() {
-  var now = new Date();
-  var t = now.toLocaleTimeString('zh-CN', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
-  var el = document.getElementById('live-time');
-  if (el) el.textContent = 'GMT+8 ' + t + ' · ONLINE';
-  setTimeout(tick, 1000);
-})();
-</script>
 
 </body>
 </html>
