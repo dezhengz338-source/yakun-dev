@@ -150,7 +150,7 @@
   .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .case { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 28px; }
   .case .c-industry { font-size: 12px; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 8px; }
-  .case h4 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .case h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
   .case .c-factory { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
   .case .c-result { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; color: var(--accent); padding-top: 14px; border-top: 1px solid var(--hairline); }
   .case .c-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
@@ -172,7 +172,7 @@
   .plan { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 28px 22px; display: flex; flex-direction: column; position: relative; }
   .plan.hot { border-color: var(--accent); }
   .plan .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.05em; }
-  .plan h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .plan h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
   .plan .p-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
   .plan .price { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 44px; line-height: 1; margin-bottom: 4px; }
   .plan .price small { font-size: 16px; color: var(--muted); font-weight: 600; }
@@ -235,6 +235,46 @@
     .sys-grid { grid-template-columns: 1fr; }
     .plans { grid-template-columns: 1fr; }
   }
+
+  /* 渠道对比 */
+  .compare { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .compare-col { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 30px 26px; }
+  .compare-col.best { border-color: var(--accent); }
+  .compare-col .ch-name { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+  .compare-col .ch-tag { font-size: 12px; color: var(--accent); margin-bottom: 18px; letter-spacing: 0.06em; }
+  .compare-col ul { list-style: none; }
+  .compare-col li { font-size: 13px; color: var(--muted); padding: 9px 0; border-bottom: 1px solid var(--hairline); line-height: 1.6; }
+  .compare-col li:last-child { border-bottom: none; }
+  .compare-col li b { color: var(--ink); font-weight: 600; }
+  .compare-col li.good::before { content: '✓ '; color: #34d399; }
+  .compare-col li.bad::before { content: '✕ '; color: #f87171; }
+
+  /* SEO / 独立站 */
+  .seo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .seo-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 30px 26px; }
+  .seo-card .snum { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 34px; color: var(--accent); margin-bottom: 12px; line-height: 1; }
+  .seo-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .seo-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* 金句 */
+  .quote-block { padding: 72px 0; }
+  .quote-block blockquote { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: clamp(22px, 3.4vw, 34px); line-height: 1.5; color: var(--ink); text-align: center; max-width: 820px; margin: 0 auto; }
+  .quote-block .qmark { color: var(--accent); }
+  .quote-block .q-src { text-align: center; font-size: 13px; color: var(--muted); margin-top: 18px; letter-spacing: 0.08em; }
+
+  /* FAQ */
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  .faq-item { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+  .faq-item summary { cursor: pointer; list-style: none; padding: 22px 26px; font-size: 16px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-family: 'Barlow Condensed', sans-serif; font-size: 24px; color: var(--accent); font-weight: 600; transition: transform 0.2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item .faq-a { padding: 0 26px 22px; font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+  @media (max-width: 900px) {
+    .compare { grid-template-columns: 1fr; }
+    .seo-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -281,7 +321,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="pains.kicker">工厂出海的三大挑战</div>
-      <div class="sec-title" data-i18n="pains.title">你是否正被这些问题困住？</div>
+      <h2 class="sec-title" data-i18n="pains.title">你是否正被这些问题困住？</h2>
       <p class="sec-desc" data-i18n="pains.desc">中国工厂出海，往往卡在这三个环节。亞坤跨境，全部替你解决。</p>
     </div>
     <div class="pains">
@@ -308,7 +348,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="svc.kicker">核心服务</div>
-      <div class="sec-title" data-i18n="svc.title">完整的出海营销方案</div>
+      <h2 class="sec-title" data-i18n="svc.title">完整的出海营销方案</h2>
       <p class="sec-desc" data-i18n="svc.desc">从广告投放到社媒运营，覆盖你全球扩张的每一个环节。</p>
     </div>
     <div class="services">
@@ -342,20 +382,59 @@
   </div>
 </section>
 
+<section id="compare" style="background:var(--bg-deep);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker" data-i18n="cmp.kicker">渠道对比</div>
+      <h2 class="sec-title" data-i18n="cmp.title">三种出海获客渠道，谁更划算</h2>
+      <p class="sec-desc" data-i18n="cmp.desc">B2B 平台、展会、社媒广告的真实对比，帮你把钱花在刀刃上。</p>
+    </div>
+    <div class="compare">
+      <div class="compare-col">
+        <div class="ch-name" data-i18n="cmp.1.name">B2B 平台</div>
+        <div class="ch-tag" data-i18n="cmp.1.tag">如阿里国际站</div>
+        <ul>
+          <li class="bad" data-i18n="cmp.1.l1">成本：年费数万 + 点击付费，被动等询盘</li>
+          <li class="bad" data-i18n="cmp.1.l2">竞争激烈，同品类扎堆比价</li>
+          <li class="bad" data-i18n="cmp.1.l3">见效慢，通常 3-6 个月才有询盘</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="ch-name" data-i18n="cmp.2.name">线下展会</div>
+        <div class="ch-tag" data-i18n="cmp.2.tag">广交会等</div>
+        <ul>
+          <li class="bad" data-i18n="cmp.2.l1">成本：展位 + 差旅动辄十万，单次高投入</li>
+          <li class="bad" data-i18n="cmp.2.l2">一年几次，覆盖面有限</li>
+          <li class="bad" data-i18n="cmp.2.l3">疫情后海外买家到场率下滑</li>
+        </ul>
+      </div>
+      <div class="compare-col best">
+        <div class="ch-name" data-i18n="cmp.3.name">社媒广告</div>
+        <div class="ch-tag" data-i18n="cmp.3.tag">Facebook / TikTok</div>
+        <ul>
+          <li class="good" data-i18n="cmp.3.l1">成本：按效果付费，单条询盘低至 ¥0.29</li>
+          <li class="good" data-i18n="cmp.3.l2">精准定向，直达目标国家买家与进口商</li>
+          <li class="good" data-i18n="cmp.3.l3">当天见效，可测试可优化，持续放大</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="systems" style="background:var(--bg-deep);">
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="sys.kicker">技术底座 · 自研系统</div>
-      <div class="sec-title" data-i18n="sys.title">AI 中台驱动的投放能力</div>
+      <h2 class="sec-title" data-i18n="sys.title">AI 中台驱动的投放能力</h2>
       <p class="sec-desc" data-i18n="sys.desc">操盘手 + AI 自动化，把重复劳动交给系统，把时间留给策略。</p>
     </div>
     <div class="sys-grid">
-      <div class="sys-card"><div class="name">AI 选品引擎</div><div class="desc" data-i18n="sys.1">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div>
-      <div class="sys-card"><div class="name">Lead Scout</div><div class="desc" data-i18n="sys.2">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div>
-      <div class="sys-card"><div class="name">LuPan 律盘</div><div class="desc" data-i18n="sys.3">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div>
-      <div class="sys-card"><div class="name">Skill Radar</div><div class="desc" data-i18n="sys.4">AI 技能生态监控，46 个活跃技能实时追踪</div></div>
-      <div class="sys-card"><div class="name">飞书桥接</div><div class="desc" data-i18n="sys.5">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div>
-      <div class="sys-card"><div class="name">WeFlow Pipeline</div><div class="desc" data-i18n="sys.6">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div>
+      <div class="sys-card"><h3 class="name" data-i18n="sys.name.1">AI 选品引擎</h3><div class="desc" data-i18n="sys.1">微信社群实时监控 + DeepSeek 评分，自动化投放选品决策</div></div>
+      <div class="sys-card"><h3 class="name" data-i18n="sys.name.2">Lead Scout</h3><div class="desc" data-i18n="sys.2">22K 买家数据库，FastAPI + SPA 外贸获客系统</div></div>
+      <div class="sys-card"><h3 class="name" data-i18n="sys.name.3">LuPan 律盘</h3><div class="desc" data-i18n="sys.3">DeepSeek AI 法律助手，案件分析 + 文书起草</div></div>
+      <div class="sys-card"><h3 class="name" data-i18n="sys.name.4">Skill Radar</h3><div class="desc" data-i18n="sys.4">AI 技能生态监控，46 个活跃技能实时追踪</div></div>
+      <div class="sys-card"><h3 class="name" data-i18n="sys.name.5">飞书桥接</h3><div class="desc" data-i18n="sys.5">微信 ↔ 飞书消息同步，Hermes Agent 智能回复</div></div>
+      <div class="sys-card"><h3 class="name" data-i18n="sys.name.6">WeFlow Pipeline</h3><div class="desc" data-i18n="sys.6">微信 4.x 数据管道，实时解密 + HTTP API + SSE</div></div>
     </div>
   </div>
 </section>
@@ -364,37 +443,64 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="case.kicker">真实案例截图</div>
-      <div class="sec-title" data-i18n="case.title">他们都已经成功出海</div>
+      <h2 class="sec-title" data-i18n="case.title">他们都已经成功出海</h2>
       <p class="sec-desc" data-i18n="case.desc">真实截图、真实数据，以下是部分客户成功案例。</p>
     </div>
     <div class="cases">
       <div class="case">
         <div class="c-industry" data-i18n="case.1.ind">办公家具制造</div>
-        <h4 data-i18n="case.1.title">广东办公家具厂 — 单日 100 条询盘</h4>
+        <h3 data-i18n="case.1.title">广东办公家具厂 — 单日 100 条询盘</h3>
         <div class="c-factory" data-i18n="case.1.factory">Future Fenlon Office Furniture · 📍 广东佛山</div>
         <p class="c-desc" data-i18n="case.1.desc">主要生产办公桌椅、员工桌等，通过 Facebook 广告精准触达印度采购商，实现低成本高质量询盘。</p>
         <div class="c-result" data-i18n="case.1.result">单日 100 条询盘 · 单次 ¥0.29 · 总花费 ¥29.26 · 目标印度</div>
       </div>
       <div class="case">
         <div class="c-industry" data-i18n="case.2.ind">激光设备制造</div>
-        <h4 data-i18n="case.2.title">深圳激光设备厂 — 成本降低 19%</h4>
+        <h3 data-i18n="case.2.title">深圳激光设备厂 — 成本降低 19%</h3>
         <div class="c-factory">📍 深圳</div>
         <p class="c-desc" data-i18n="case.2.desc">工业设备以前觉得 Facebook 广告是卖消费品的，试了之后广告成本比预期低 19%，每月稳定海外询盘。</p>
         <div class="c-result" data-i18n="case.2.result">广告成本降低 19% · 稳定月询盘</div>
       </div>
       <div class="case">
         <div class="c-industry" data-i18n="case.3.ind">沙发制造</div>
-        <h4 data-i18n="case.3.title">广东沙发厂 — ¥1.75/条询盘</h4>
+        <h3 data-i18n="case.3.title">广东沙发厂 — ¥1.75/条询盘</h3>
         <div class="c-factory">📍 广东</div>
         <p class="c-desc" data-i18n="case.3.desc">从账号建立、素材制作到广告优化全包，每月几百块广告费带来上百条消息对话。</p>
         <div class="c-result" data-i18n="case.3.result">¥1.75/条询盘 · 上百条消息对话</div>
       </div>
       <div class="case">
         <div class="c-industry" data-i18n="case.4.ind">门窗制造</div>
-        <h4 data-i18n="case.4.title">广东门窗厂 — 触达高端买家</h4>
+        <h3 data-i18n="case.4.title">广东门窗厂 — 触达高端买家</h3>
         <div class="c-factory">📍 广东</div>
         <p class="c-desc" data-i18n="case.4.desc">轻奢门窗产品通过视频广告精准触达海外设计师和高端装修公司，询盘质量更高、预算更大。</p>
         <div class="c-result" data-i18n="case.4.result">精准触达高端买家 · 更高预算</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="seo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker" data-i18n="seo.kicker">独立站 & SEO</div>
+      <h2 class="sec-title" data-i18n="seo.title">广告快，SEO 久，两条腿走路</h2>
+      <p class="sec-desc" data-i18n="seo.desc">广告负责快速起量，独立站 + SEO 负责持续免费流量，获客成本才会越做越低。</p>
+    </div>
+    <div class="seo-grid">
+      <div class="seo-card">
+        <div class="snum">01</div>
+        <h3 data-i18n="seo.1.title">独立站建设</h3>
+        <p data-i18n="seo.1.desc">专业外贸网站承接广告流量，建立品牌信任，让询盘沉淀在自己的资产上。</p>
+      </div>
+      <div class="seo-card">
+        <div class="snum">02</div>
+        <h3 data-i18n="seo.2.title">SEO 优化</h3>
+        <p data-i18n="seo.2.desc">让 Google 收录你的产品与行业词，海外买家搜索时主动找到你。</p>
+      </div>
+      <div class="seo-card">
+        <div class="snum">03</div>
+        <h3 data-i18n="seo.3.title">内容营销</h3>
+        <p data-i18n="seo.3.desc">行业内容 + 产品页，被搜索引擎和 AI 引用，长期沉淀自然流量。</p>
       </div>
     </div>
   </div>
@@ -405,7 +511,14 @@
     <div><div class="b-num">150+</div><div class="b-lbl" data-i18n="band.1">服务工厂</div></div>
     <div><div class="b-num">98%</div><div class="b-lbl" data-i18n="band.2">客户满意度</div></div>
     <div><div class="b-num">30+</div><div class="b-lbl" data-i18n="band.3">覆盖市场</div></div>
-    <div><div class="b-num">320%</div><div class="b-lbl" data-i18n="band.4">平均 ROI 提升</div></div>
+    <div><div class="b-num">138%</div><div class="b-lbl" data-i18n="band.4">平均 ROI 提升</div></div>
+  </div>
+</div>
+
+<div class="quote-block" style="background:var(--bg-deep); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <blockquote><span class="qmark">「</span><span data-i18n="quote.1">外贸出海，不只是投广告，更是品牌与市场的深度连接。</span><span class="qmark">」</span></blockquote>
+    <div class="q-src" data-i18n="quote.1.src">— 亞坤跨境 · 操盘手札记</div>
   </div>
 </div>
 
@@ -413,7 +526,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="rev.kicker">客户评价</div>
-      <div class="sec-title" data-i18n="rev.title">他们怎么说</div>
+      <h2 class="sec-title" data-i18n="rev.title">他们怎么说</h2>
       <p class="sec-desc" data-i18n="rev.desc">来自真实工厂合作伙伴的反馈。</p>
     </div>
     <div class="reviews">
@@ -440,13 +553,13 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="price.kicker">服务套餐</div>
-      <div class="sec-title" data-i18n="price.title">按广告消耗规模，匹配你的方案</div>
+      <h2 class="sec-title" data-i18n="price.title">按广告消耗规模，匹配你的方案</h2>
       <p class="sec-desc" data-i18n="price.desc">两种计费模式，针对不同预算规模的工厂。透明无隐藏费用。</p>
     </div>
     <div class="plans" style="grid-template-columns: 1fr 1fr;">
       <div class="plan hot">
         <div class="badge" data-i18n="plan.1.badge">月消耗 &lt; ¥2万</div>
-        <h4 data-i18n="plan.1.name">包月服务</h4>
+        <h3 data-i18n="plan.1.name">包月服务</h3>
         <div class="p-sub" data-i18n="plan.1.sub">固定服务费，广告费自理</div>
         <div class="price">¥2,980<small data-i18n="plan.unit">/月</small></div>
         <ul>
@@ -459,7 +572,7 @@
       </div>
       <div class="plan">
         <div class="badge" data-i18n="plan.2.badge">月消耗 ≥ ¥2万</div>
-        <h4 data-i18n="plan.2.name">佣金服务</h4>
+        <h3 data-i18n="plan.2.name">佣金服务</h3>
         <div class="p-sub" data-i18n="plan.2.sub">按广告消耗阶梯计费</div>
         <div class="price">15%<small data-i18n="plan.2.unit">起</small></div>
         <ul>
@@ -479,7 +592,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="about.kicker">关于亞坤</div>
-      <div class="sec-title" data-i18n="about.title">专注工厂出海的操盘手</div>
+      <h2 class="sec-title" data-i18n="about.title">专注工厂出海的操盘手</h2>
     </div>
     <div class="about-grid">
       <div>
@@ -499,11 +612,38 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker" data-i18n="faq.kicker">常见问题</div>
+      <h2 class="sec-title" data-i18n="faq.title">工厂出海，你最关心的 4 个问题</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-i18n="faq.1.q">中国工厂如何低成本获取海外客户？</summary>
+        <div class="faq-a" data-i18n="faq.1.a">通过 Facebook/TikTok 广告精准投放，最低 ¥0.29 一条询盘，比展会和 B2B 平台低得多。我们从账号搭建、素材制作到投放优化全包，你只管接询盘。</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.2.q">Facebook 广告适合哪些行业？</summary>
+        <div class="faq-a" data-i18n="faq.2.a">五金工具、电子、户外、纺织、家具、建材、机械等制造行业都适合。只要有明确的海外目标市场和可发货的产品，就能投。</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.3.q">外贸出海需要多久才能见效？</summary>
+        <div class="faq-a" data-i18n="faq.3.a">广告投放通常 3-7 天开始有询盘，1-3 个月进入稳定获客期。具体取决于产品、目标市场和预算。</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.4.q">如何选择外贸营销服务商？</summary>
+        <div class="faq-a" data-i18n="faq.4.a">看三点：有没有真实案例数据、懂不懂你的行业、收费是否透明。我们提供免费策略评估，先看方案再决定。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker" data-i18n="contact.kicker">联系我们</div>
-      <div class="sec-title" data-i18n="contact.title">开启你的全球扩张</div>
+      <h2 class="sec-title" data-i18n="contact.title">开启你的全球扩张</h2>
       <p class="sec-desc" data-i18n="contact.desc">填写表单或扫码，24 小时内提供免费出海策略评估。</p>
     </div>
     <div class="contact-grid">
@@ -647,7 +787,22 @@ var I18N = {
     'footer.desc': 'Connecting Chinese Manufacturing to Global Markets · 让中国制造无缝连接全球买家。',
     'footer.svc': '服务', 'footer.svc1': 'FB/TK 广告投放', 'footer.svc2': '社媒代运营', 'footer.svc3': '成功案例', 'footer.svc4': '服务套餐',
     'footer.contact': '联系', 'footer.wx': '微信：dezheng284851', 'footer.about': '关于亞坤',
-    'footer.copy': '© 2026 Yakun Transnational. All rights reserved. · 专注工厂出海 · 让中国制造走向全球'
+    'footer.copy': '© 2026 Yakun Transnational. All rights reserved. · 专注工厂出海 · 让中国制造走向全球',
+    'sys.name.1': 'AI 选品引擎', 'sys.name.2': 'Lead Scout', 'sys.name.3': 'LuPan 律盘', 'sys.name.4': 'Skill Radar', 'sys.name.5': '飞书桥接', 'sys.name.6': 'WeFlow Pipeline',
+    'cmp.kicker': '渠道对比', 'cmp.title': '三种出海获客渠道，谁更划算', 'cmp.desc': 'B2B 平台、展会、社媒广告的真实对比，帮你把钱花在刀刃上。',
+    'cmp.1.name': 'B2B 平台', 'cmp.1.tag': '如阿里国际站', 'cmp.1.l1': '成本：年费数万 + 点击付费，被动等询盘', 'cmp.1.l2': '竞争激烈，同品类扎堆比价', 'cmp.1.l3': '见效慢，通常 3-6 个月才有询盘',
+    'cmp.2.name': '线下展会', 'cmp.2.tag': '广交会等', 'cmp.2.l1': '成本：展位 + 差旅动辄十万，单次高投入', 'cmp.2.l2': '一年几次，覆盖面有限', 'cmp.2.l3': '疫情后海外买家到场率下滑',
+    'cmp.3.name': '社媒广告', 'cmp.3.tag': 'Facebook / TikTok', 'cmp.3.l1': '成本：按效果付费，单条询盘低至 ¥0.29', 'cmp.3.l2': '精准定向，直达目标国家买家与进口商', 'cmp.3.l3': '当天见效，可测试可优化，持续放大',
+    'seo.kicker': '独立站 & SEO', 'seo.title': '广告快，SEO 久，两条腿走路', 'seo.desc': '广告负责快速起量，独立站 + SEO 负责持续免费流量，获客成本才会越做越低。',
+    'seo.1.title': '独立站建设', 'seo.1.desc': '专业外贸网站承接广告流量，建立品牌信任，让询盘沉淀在自己的资产上。',
+    'seo.2.title': 'SEO 优化', 'seo.2.desc': '让 Google 收录你的产品与行业词，海外买家搜索时主动找到你。',
+    'seo.3.title': '内容营销', 'seo.3.desc': '行业内容 + 产品页，被搜索引擎和 AI 引用，长期沉淀自然流量。',
+    'quote.1': '外贸出海，不只是投广告，更是品牌与市场的深度连接。', 'quote.1.src': '— 亞坤跨境 · 操盘手札记',
+    'faq.kicker': '常见问题', 'faq.title': '工厂出海，你最关心的 4 个问题',
+    'faq.1.q': '中国工厂如何低成本获取海外客户？', 'faq.1.a': '通过 Facebook/TikTok 广告精准投放，最低 ¥0.29 一条询盘，比展会和 B2B 平台低得多。我们从账号搭建、素材制作到投放优化全包，你只管接询盘。',
+    'faq.2.q': 'Facebook 广告适合哪些行业？', 'faq.2.a': '五金工具、电子、户外、纺织、家具、建材、机械等制造行业都适合。只要有明确的海外目标市场和可发货的产品，就能投。',
+    'faq.3.q': '外贸出海需要多久才能见效？', 'faq.3.a': '广告投放通常 3-7 天开始有询盘，1-3 个月进入稳定获客期。具体取决于产品、目标市场和预算。',
+    'faq.4.q': '如何选择外贸营销服务商？', 'faq.4.a': '看三点：有没有真实案例数据、懂不懂你的行业、收费是否透明。我们提供免费策略评估，先看方案再决定。'
   },
   en: {
     'brand': 'Yakun Transnational',
@@ -666,7 +821,7 @@ var I18N = {
     'svc.1.li1': 'Precision Targeting — Reach global buyers and importers', 'svc.1.li2': 'Professional Creatives — Photo and video ads produced in-house', 'svc.1.li3': 'Continuous Optimization — Data-driven strategy adjustments', 'svc.1.li4': 'Multi-Platform — Facebook, Instagram, TikTok',
     'svc.2.title': 'Overseas Social Media Management', 'svc.2.metric': 'Monthly Follower Growth', 'svc.2.desc': 'Build your overseas social media presence from scratch. Through consistent quality content and fan engagement, establish trust and recognition in your target markets.',
     'svc.2.li1': 'Account Setup & Optimization — Professional brand image', 'svc.2.li2': 'Content Strategy — Content matrix targeting overseas buyers', 'svc.2.li3': 'Follower Growth — Precise acquisition and engagement', 'svc.2.li4': 'Analytics Reports — Monthly detailed performance review',
-    'sys.kicker': 'Tech Foundation · Self-built Systems', 'sys.title': 'AI-driven Advertising Capability', 'sys.desc': 'Trader + AI automation — delegate repetitive work to systems, keep time for strategy.',
+    'sys.kicker': 'Tech Foundation · Self-built Systems', 'sys.title': 'AI-driven Advertising Capability', 'sys.desc': 'Operator + AI automation — delegate repetitive work to systems, keep time for strategy.',
     'sys.1': 'WeChat group monitoring + DeepSeek scoring for automated product selection',
     'sys.2': '22K buyer database, FastAPI + SPA lead generation system',
     'sys.3': 'DeepSeek AI legal assistant for case analysis + drafting',
@@ -688,7 +843,7 @@ var I18N = {
     'plan.1.badge': 'Ad spend < ¥20K', 'plan.1.name': 'Monthly Flat Fee', 'plan.1.sub': 'Fixed service fee, ad spend on your own', 'plan.1.li1': 'Facebook/TikTok advertising + continuous optimization', 'plan.1.li2': 'Social media management (page setup + 12 posts/mo)', 'plan.1.li3': 'Weekly performance reports', 'plan.1.li4': 'WeChat/WhatsApp support',
     'plan.2.badge': 'Ad spend ≥ ¥20K', 'plan.2.name': 'Commission Model', 'plan.2.sub': 'Tiered commission on ad spend', 'plan.2.unit': 'from', 'plan.2.li1': 'Spend ¥20-30K · 15% commission', 'plan.2.li2': 'Spend ¥30-100K · 12% commission', 'plan.2.li3': 'Spend ¥100K+ · 10% commission', 'plan.2.li4': 'Social media management included free', 'plan.2.li5': 'Dedicated manager + monthly strategy call',
     'plan.cta': 'Subscribe',
-    'about.kicker': 'About Yakun', 'about.title': 'Expert Focused on Factory Export',
+    'about.kicker': 'About Yakun', 'about.title': 'Operator Focused on Factory Export',
     'about.p1': 'Yakun Transnational specializes in overseas digital marketing for Chinese manufacturing factories. Our founding team comes from the front lines of the export industry, deeply understanding the challenges factories face — language barriers, cultural differences, and market knowledge gaps.',
     'about.p2': 'Core members hold Facebook and TikTok advertising certifications, with extensive hands-on cases across hardware, electronics, outdoor goods, textiles, and other manufacturing verticals. We\'re not just ad managers — we\'re your overseas market development partners.',
     'about.p3': 'An independent operator at the intersection of cross-border digital marketing and AI automation, connecting the full chain of account sourcing → product arbitrage → precision advertising → payment settlement, replacing repetitive work with AI.',
@@ -701,7 +856,22 @@ var I18N = {
     'footer.desc': 'Connecting Chinese Manufacturing to Global Markets.',
     'footer.svc': 'Services', 'footer.svc1': 'FB/TK Advertising', 'footer.svc2': 'Social Media', 'footer.svc3': 'Success Cases', 'footer.svc4': 'Service Plans',
     'footer.contact': 'Contact', 'footer.wx': 'WeChat: dezheng284851', 'footer.about': 'About Yakun',
-    'footer.copy': '© 2026 Yakun Transnational. All rights reserved. · Focused on factory export · Taking Chinese manufacturing global'
+    'footer.copy': '© 2026 Yakun Transnational. All rights reserved. · Focused on factory export · Taking Chinese manufacturing global',
+    'sys.name.1': 'AI Product Selector', 'sys.name.2': 'Lead Scout', 'sys.name.3': 'LuPan', 'sys.name.4': 'Skill Radar', 'sys.name.5': 'Feishu Bridge', 'sys.name.6': 'WeFlow Pipeline',
+    'cmp.kicker': 'Channel Comparison', 'cmp.title': 'Which Channel Gets You Global Buyers for Less', 'cmp.desc': 'A real comparison of B2B platforms, trade shows, and social media ads — so you spend where it counts.',
+    'cmp.1.name': 'B2B Platforms', 'cmp.1.tag': 'e.g. Alibaba', 'cmp.1.l1': 'Cost: annual fees in the tens of thousands + pay-per-click, passive leads', 'cmp.1.l2': 'Fierce competition, crowded price wars in every category', 'cmp.1.l3': 'Slow results — usually 3-6 months before leads arrive',
+    'cmp.2.name': 'Trade Shows', 'cmp.2.tag': 'e.g. Canton Fair', 'cmp.2.l1': 'Cost: booth + travel easily six figures per show', 'cmp.2.l2': 'Only a few times a year, limited reach', 'cmp.2.l3': 'Post-pandemic overseas buyer turnout declining',
+    'cmp.3.name': 'Social Media Ads', 'cmp.3.tag': 'Facebook / TikTok', 'cmp.3.l1': 'Cost: pay per result, leads as low as ¥0.29 each', 'cmp.3.l2': 'Precise targeting — reach buyers and importers in your target countries', 'cmp.3.l3': 'Results the same day — testable, optimizable, scalable',
+    'seo.kicker': 'Independent Site & SEO', 'seo.title': 'Ads Are Fast, SEO Lasts — Do Both', 'seo.desc': 'Ads drive quick volume; an independent site + SEO bring sustained free traffic. Together, your cost per lead keeps dropping.',
+    'seo.1.title': 'Independent Site', 'seo.1.desc': 'A professional export website that converts ad traffic, builds trust, and keeps leads on an asset you own.',
+    'seo.2.title': 'SEO Optimization', 'seo.2.desc': 'Get your products and industry keywords indexed by Google, so overseas buyers find you when they search.',
+    'seo.3.title': 'Content Marketing', 'seo.3.desc': 'Industry content + product pages, cited by search engines and AI, compounding organic traffic over time.',
+    'quote.1': 'Going global isn\'t just running ads — it\'s building a brand and connecting with the market.', 'quote.1.src': '— Yakun Transnational · Operator Notes',
+    'faq.kicker': 'FAQ', 'faq.title': '4 Questions Factories Ask Most',
+    'faq.1.q': 'How can a Chinese factory get overseas customers at low cost?', 'faq.1.a': 'With precise Facebook/TikTok advertising, leads can cost as little as ¥0.29 — far lower than trade shows or B2B platforms. We handle account setup, creatives, and optimization end to end; you just handle the inquiries.',
+    'faq.2.q': 'Which industries are suitable for Facebook ads?', 'faq.2.a': 'Hardware, electronics, outdoor goods, textiles, furniture, building materials, machinery — nearly any manufacturing vertical. As long as you have a clear target market and a shippable product, it works.',
+    'faq.3.q': 'How long does it take to see results?', 'faq.3.a': 'Ads typically generate the first inquiries in 3-7 days, with stable acquisition within 1-3 months. It depends on product, market, and budget.',
+    'faq.4.q': 'How do I choose a marketing agency?', 'faq.4.a': 'Check three things: real case data, industry expertise, and transparent pricing. We offer a free strategy assessment — review the plan before you decide.'
   }
 };
 
