@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta（Facebook）广告投放全指南：开户流程、费用、避坑详解 - 亞坤跨境</title>
+<meta name="description" content="Meta 广告是什么、怎么开户、适合什么产品、投放费用与封户避坑。中国工厂 Facebook 广告出海获客全攻略：开户 4 步流程、个人户 vs 企业户、投放策略详解。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A1622'/%3E%3Cpath d='M9 22 L23 10 M9 22 L23 22 M9 10 L23 10' stroke='%23E8552A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg: #0A1622; --bg-deep: #081018; --surface: #0F1E2E;
+    --ink: #F2F4F7; --muted: #93A0B4; --accent: #E8552A;
+    --accent-dim: rgba(232,85,42,0.14); --hairline: rgba(255,255,255,0.08);
+    --radius: 10px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', 'Noto Sans SC', system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.75;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .condensed { font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif; text-transform: uppercase; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Noto Sans SC', sans-serif; font-size: 15px; font-weight: 700;
+    padding: 14px 28px; border-radius: 8px; text-decoration: none; cursor: pointer; border: none;
+    transition: transform 0.15s ease, background 0.2s ease; white-space: nowrap;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #f06438; transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  header { position: sticky; top: 0; z-index: 50; background: rgba(8,16,24,0.85);
+    backdrop-filter: blur(16px); border-bottom: 1px solid var(--hairline); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800; font-size: 19px;
+    letter-spacing: .04em; text-decoration: none; color: var(--ink); }
+  .logo .cn { color: var(--accent); }
+  .nav-links { display: flex; gap: 22px; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.on { color: var(--accent); font-weight: 600; }
+
+  .article-hero { padding: 64px 0 40px; border-bottom: 1px solid var(--hairline); }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .crumb a { color: var(--muted); text-decoration: none; }
+  .crumb a:hover { color: var(--accent); }
+  .article-hero h1 { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800;
+    font-size: clamp(34px, 5vw, 54px); line-height: 1.15; letter-spacing: -.01em; margin-bottom: 20px; }
+  .article-hero h1 .hl { color: var(--accent); }
+  .lead { font-size: 17px; color: var(--muted); max-width: 760px; line-height: 1.9;
+    padding-left: 18px; border-left: 3px solid var(--accent); margin-bottom: 12px; }
+  .meta-note { font-size: 13px; color: var(--muted); }
+
+  .article { max-width: 780px; margin: 0 auto; padding: 48px 0 24px; }
+  .article h2 { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 700;
+    font-size: 28px; margin: 48px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent); }
+  .article h3 { font-size: 18px; font-weight: 700; margin: 28px 0 10px; color: var(--ink); }
+  .article p { color: #C6D0DD; font-size: 15.5px; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 18px 24px; color: #C6D0DD; font-size: 15.5px; }
+  .article li { margin-bottom: 8px; }
+  .article strong { color: var(--ink); }
+  .article a { color: var(--accent); }
+
+  .step { display: flex; gap: 16px; margin-bottom: 18px; background: var(--surface);
+    border: 1px solid var(--hairline); border-radius: var(--radius); padding: 18px 20px; }
+  .step .no { flex-shrink: 0; width: 34px; height: 34px; border-radius: 8px; background: var(--accent);
+    color: #fff; font-family: 'Barlow Condensed',sans-serif; font-weight: 800; font-size: 18px;
+    display: flex; align-items: center; justify-content: center; }
+  .step h4 { font-size: 16px; margin-bottom: 4px; }
+  .step p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0 22px; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border: 1px solid var(--hairline); }
+  th { background: var(--surface); color: var(--ink); font-weight: 600; }
+  td { color: #C6D0DD; }
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .callout { background: var(--accent-dim); border: 1px solid rgba(232,85,42,0.3);
+    border-radius: var(--radius); padding: 16px 20px; margin: 22px 0; }
+  .callout p { margin: 0; color: #E8B39B; font-size: 14.5px; }
+  .callout strong { color: var(--accent); }
+
+  .faq { border: 1px solid var(--hairline); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+  .faq summary { cursor: pointer; padding: 16px 20px; font-weight: 600; font-size: 15px;
+    background: var(--surface); list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; float: right; color: var(--accent); font-weight: 700; }
+  .faq[open] summary::after { content: '−'; }
+  .faq .faq-a { padding: 14px 20px 18px; color: #C6D0DD; font-size: 14.5px; border-top: 1px solid var(--hairline); }
+
+  .cta-box { margin: 56px auto 40px; max-width: 780px; text-align: center; background: linear-gradient(135deg, rgba(232,85,42,0.14), rgba(232,85,42,0.04));
+    border: 1px solid rgba(232,85,42,0.3); border-radius: 16px; padding: 48px 32px; }
+  .cta-box h2 { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800;
+    font-size: 32px; margin-bottom: 12px; border: none; padding: 0; }
+  .cta-box p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+  .cta-box .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--hairline); padding: 40px 0; margin-top: 40px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .f-brand { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800; font-size: 17px; }
+  .f-brand span { color: var(--accent); }
+  .f-desc { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .foot a { color: var(--muted); text-decoration: none; font-size: 13px; margin-left: 18px; }
+  .foot a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><span class="cn">亞坤跨境</span> YAKUN</a>
+    <nav class="nav-links">
+      <a href="/">首页</a>
+      <a href="meta.html" class="on">Meta 广告</a>
+      <a href="tiktok.html">TikTok 广告</a>
+      <a href="/#services">服务</a>
+      <a href="/#cases">案例</a>
+      <a href="/#pricing">定价</a>
+      <a href="/#contact">联系</a>
+      <a class="btn btn-primary" href="/#contact" style="padding:9px 18px; font-size:13px;">免费咨询</a>
+    </nav>
+  </div>
+</header>
+
+<section class="article-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">首页</a> › Meta 广告投放全指南</div>
+    <h1>Meta（Facebook）广告<br>投放<span class="hl">全指南</span></h1>
+    <p class="lead">Meta 广告是 Facebook 和 Instagram 上的付费推广系统，通过按国家、行业、职位和兴趣精准定位海外买家，让中国工厂的产品直接出现在采购商面前，是目前外贸获客成本最低的渠道之一。</p>
+    <div class="meta-note">更新日期：2026 年 8 月 ｜ 参考：Meta Business 帮助中心</div>
+  </div>
+</section>
+
+<article class="article">
+  <h2>一、Meta 广告是什么</h2>
+  <p><strong>Meta 广告</strong>指在 Meta 公司旗下的 Facebook、Instagram、Messenger 上投放的付费内容。广告主只需设定投放目标（获取询盘、引导加好友、促成成交），系统就会根据算法把广告推送给最可能产生行动的海外用户。</p>
+  <p>与国内抖音、朋友圈广告类似，但 Meta 广告覆盖全球 200 多个国家和地区，Facebook 月活跃用户约 30 亿、Instagram 约 20 亿，是外贸 B2B 和跨境电商获取海外客户最成熟的付费流量渠道。</p>
+  <p>对工厂来说，Meta 广告解决的是一个核心问题：<strong>不用等客户上门，而是主动把产品推到海外采购商眼前</strong>。</p>
+
+  <h2>二、为什么工厂出海首选 Meta 广告</h2>
+  <ul>
+    <li><strong>覆盖面大</strong>：Facebook 月活约 30 亿，覆盖 200+ 国家和地区，B2B 采购商、进口商同样活跃其中</li>
+    <li><strong>定向精准</strong>：可按国家、年龄、行业、职位头衔、兴趣、行为精准锁定目标买家（例如锁定印度的家具采购经理）</li>
+    <li><strong>成本可控</strong>：日预算从几美元起，测试期小额验证，跑通数据后再放量</li>
+    <li><strong>见效快</strong>：相比展会动辄数万元投入、B2B 平台长期竞价，Meta 广告当天就能拿到询盘数据</li>
+    <li><strong>可量化</strong>：曝光、点击、询盘成本、ROI 全链路可追踪，每一分钱花在哪都清楚</li>
+  </ul>
+
+  <h2>三、Meta 广告开户流程（4 步详解）</h2>
+  <div class="step"><div class="no">1</div><div>
+    <h4>注册 Business Manager（商务管理平台）</h4>
+    <p>登录 business.facebook.com，用企业主体创建商务管理平台。这是管理广告账户、主页、支付方式的中枢，后续所有资产都挂在这里。</p>
+  </div></div>
+  <div class="step"><div class="no">2</div><div>
+    <h4>创建广告账户</h4>
+    <p>在商务管理平台内创建广告账户，选择币种和时区——<strong>这两项创建后不可更改</strong>，务必按目标市场提前确认。</p>
+  </div></div>
+  <div class="step"><div class="no">3</div><div>
+    <h4>绑定支付方式</h4>
+    <p>绑定信用卡、PayPal，或通过正规代理挂账（代理通常按月结算，适合预算较大、想省事的工厂）。</p>
+  </div></div>
+  <div class="step"><div class="no">4</div><div>
+    <h4>提交开户审核</h4>
+    <p><strong>个人户当天可用</strong>，适合新手测试；<strong>企业户需提交营业执照审核，约 3-5 个工作日</strong>，但额度更高、账户更稳定。</p>
+  </div></div>
+
+  <div class="callout"><p><strong>避坑提醒：</strong>开户本身免费，任何「开户收费」的中介都要警惕。真正的费用是广告消耗，以及你自愿选择的代运营服务费。</p></div>
+
+  <h2>四、个人户 vs 企业户，选哪个</h2>
+  <table>
+    <tr><th>对比项</th><th>个人广告户</th><th>企业广告户</th></tr>
+    <tr><td>开通速度</td><td>当天可用</td><td>审核 3-5 个工作日</td></tr>
+    <tr><td>日消耗限额</td><td>较低，适合测试</td><td>更高，适合放量</td></tr>
+    <tr><td>稳定性</td><td>一般，易受风控</td><td>更高，封户风险低</td></tr>
+    <tr><td>适用场景</td><td>新手测试、小预算</td><td>长期投放、放量扩量</td></tr>
+  </table>
+  <p><strong>结论：</strong>刚起步用个人户跑通模型，验证产品有询盘后，再转企业户放量。</p>
+
+  <h2>五、Meta 广告有哪些类型</h2>
+  <ul>
+    <li><strong>图片广告</strong>：最简单，适合 B2B 产品展示，单图 + 文案即可起量</li>
+    <li><strong>视频广告</strong>：工厂生产线实拍、产品演示，信任感更强，转化通常优于图片</li>
+    <li><strong>轮播广告</strong>：多图/多视频滑动展示，适合展示多款产品或同一产品的多角度</li>
+    <li><strong>线索表单广告（Lead Ads）</strong>：用户在站内直接填表，无需跳转，是 B2B 询盘最有效的形式</li>
+    <li><strong>Reels 短视频广告</strong>：对标 TikTok 的短视频形态，年轻受众触达率高</li>
+  </ul>
+  <p>工厂 B2B 获客，<strong>线索表单广告 + 视频广告</strong>组合效果最稳：视频建立信任，表单直接收割询盘。</p>
+
+  <h2>六、适合哪些产品 / 行业</h2>
+  <ul>
+    <li><strong>B2B 工业品</strong>：机械设备、办公家具、五金配件、激光设备——决策链清晰，询盘质量高</li>
+    <li><strong>消费类</strong>：小家电、家居、户外用品——视觉冲击强，转化好</li>
+    <li><strong>建材、纺织</strong>：大宗采购，适合长周期再营销跟进</li>
+    <li><strong>不太适合</strong>：单价极低、利润覆盖不了广告成本的产品，或平台政策敏感类目</li>
+  </ul>
+
+  <h2>七、投放策略要点</h2>
+  <ul>
+    <li><strong>定向</strong>：先宽后窄。先用较宽受众跑出数据，再根据数据收缩到高转化人群</li>
+    <li><strong>预算</strong>：测试期 ¥50-100/天/组，跑 3-7 天看数据，再决定加投或关停</li>
+    <li><strong>素材</strong>：工厂实拍 > 精修图。海外买家更信真实生产线，而非华丽海报</li>
+    <li><strong>养号</strong>：新账户先跑 3-7 天小额养号期，别一上来就上量或投敏感类目</li>
+    <li><strong>再营销</strong>：对点击过但没询盘的访客二次投放，成本远低于冷启动</li>
+  </ul>
+
+  <h2>八、封户避坑指南</h2>
+  <ul>
+    <li>新户前 7 天避免突然大额充值或剧烈调整预算</li>
+    <li>广告素材避免夸大宣传、侵权图片、违规承诺（如"保证成交"）</li>
+    <li>企业户主体需与营业执照一致，个人户切忌频繁切换 IP 或设备登录</li>
+    <li>不要在广告文案里出现平台敏感词，投放前先过一遍 Meta 广告政策</li>
+  </ul>
+
+  <h2>九、常见问题 FAQ</h2>
+  <details class="faq"><summary>Meta 广告开户要花钱吗？</summary>
+    <div class="faq-a">开户本身免费。费用是广告消耗 + 代运营服务费（如走代理）。任何「开户收费」的中介都要警惕。</div></details>
+  <details class="faq"><summary>个人户和企业户有什么区别？</summary>
+    <div class="faq-a">个人户当天开通、日限额低，适合测试；企业户需审核但额度高、更稳定，适合放量。</div></details>
+  <details class="faq"><summary>一天要投多少钱？</summary>
+    <div class="faq-a">建议测试期 ¥50-100/天，跑出数据后再按 ROI 放量。没有固定标准，取决于客单价和利润空间。</div></details>
+  <details class="faq"><summary>工厂产品适合投 Meta 吗？</summary>
+    <div class="faq-a">B2B 工业品、家具、建材、机械设备等都很适合。只要客单价能覆盖广告成本，就能跑正 ROI。</div></details>
+  <details class="faq"><summary>广告账户被封了怎么办？</summary>
+    <div class="faq-a">先看封禁原因，走申诉通道提交材料。日常注意养号、素材合规、避免违规操作，可大幅降低封户概率。</div></details>
+  <details class="faq"><summary>多久能见到询盘？</summary>
+    <div class="faq-a">素材和定向没问题的话，通常投放当天到 3 天内就能见到第一批询盘，之后持续优化放大。</div></details>
+  <details class="faq"><summary>自己投还是找代运营？</summary>
+    <div class="faq-a">懂投放、有时间可以自己测；不懂投放或想快速起量，找有外贸经验的代运营（如亞坤跨境）更省心，通常按消耗比例或固定服务费结算。</div></details>
+  <details class="faq"><summary>Meta 广告和 TikTok 广告选哪个？</summary>
+    <div class="faq-a">Meta 覆盖广、B2B 成熟、定向精准；TikTok 年轻受众多、创意驱动、适合快消和视觉型产品。B2B 工业品优先 Meta，两者搭配效果最佳。</div></details>
+</article>
+
+<div class="wrap">
+  <div class="cta-box">
+    <h2>不知道从哪一步开始？</h2>
+    <p>把你的产品和目标市场告诉我们，免费出一套 Meta 广告出海投放方案。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/#contact">获取免费出海方案 →</a>
+      <a class="btn btn-ghost" href="https://wa.me/8613285287302" target="_blank" rel="noopener">WhatsApp 咨询</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="f-brand"><span>亞坤跨境</span> YAKUN</div>
+      <div class="f-desc">连接中国制造到全球买家 · Connecting Chinese Manufacturing to Global Markets</div>
+    </div>
+    <div>
+      <a href="/#services">服务</a>
+      <a href="meta.html">Meta 广告</a>
+      <a href="tiktok.html">TikTok 广告</a>
+      <a href="/#contact">联系</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

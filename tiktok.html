@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok 广告投放全指南：开户、选品、素材与避坑详解 - 亞坤跨境</title>
+<meta name="description" content="TikTok 广告是什么、怎么开户、适合什么产品、投放费用与策略。中国工厂 TikTok 广告出海获客全攻略：开户流程、信息流 vs Spark Ads、创意素材打法详解。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A1622'/%3E%3Cpath d='M9 22 L23 10 M9 22 L23 22 M9 10 L23 10' stroke='%23E8552A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg: #0A1622; --bg-deep: #081018; --surface: #0F1E2E;
+    --ink: #F2F4F7; --muted: #93A0B4; --accent: #E8552A;
+    --accent-dim: rgba(232,85,42,0.14); --hairline: rgba(255,255,255,0.08);
+    --radius: 10px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', 'Noto Sans SC', system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.75;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .condensed { font-family: 'Barlow Condensed', 'Noto Sans SC', sans-serif; text-transform: uppercase; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Noto Sans SC', sans-serif; font-size: 15px; font-weight: 700;
+    padding: 14px 28px; border-radius: 8px; text-decoration: none; cursor: pointer; border: none;
+    transition: transform 0.15s ease, background 0.2s ease; white-space: nowrap;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #f06438; transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  header { position: sticky; top: 0; z-index: 50; background: rgba(8,16,24,0.85);
+    backdrop-filter: blur(16px); border-bottom: 1px solid var(--hairline); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800; font-size: 19px;
+    letter-spacing: .04em; text-decoration: none; color: var(--ink); }
+  .logo .cn { color: var(--accent); }
+  .nav-links { display: flex; gap: 22px; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.on { color: var(--accent); font-weight: 600; }
+
+  .article-hero { padding: 64px 0 40px; border-bottom: 1px solid var(--hairline); }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .crumb a { color: var(--muted); text-decoration: none; }
+  .crumb a:hover { color: var(--accent); }
+  .article-hero h1 { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800;
+    font-size: clamp(34px, 5vw, 54px); line-height: 1.15; letter-spacing: -.01em; margin-bottom: 20px; }
+  .article-hero h1 .hl { color: var(--accent); }
+  .lead { font-size: 17px; color: var(--muted); max-width: 760px; line-height: 1.9;
+    padding-left: 18px; border-left: 3px solid var(--accent); margin-bottom: 12px; }
+  .meta-note { font-size: 13px; color: var(--muted); }
+
+  .article { max-width: 780px; margin: 0 auto; padding: 48px 0 24px; }
+  .article h2 { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 700;
+    font-size: 28px; margin: 48px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent); }
+  .article h3 { font-size: 18px; font-weight: 700; margin: 28px 0 10px; color: var(--ink); }
+  .article p { color: #C6D0DD; font-size: 15.5px; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 18px 24px; color: #C6D0DD; font-size: 15.5px; }
+  .article li { margin-bottom: 8px; }
+  .article strong { color: var(--ink); }
+  .article a { color: var(--accent); }
+
+  .step { display: flex; gap: 16px; margin-bottom: 18px; background: var(--surface);
+    border: 1px solid var(--hairline); border-radius: var(--radius); padding: 18px 20px; }
+  .step .no { flex-shrink: 0; width: 34px; height: 34px; border-radius: 8px; background: var(--accent);
+    color: #fff; font-family: 'Barlow Condensed',sans-serif; font-weight: 800; font-size: 18px;
+    display: flex; align-items: center; justify-content: center; }
+  .step h4 { font-size: 16px; margin-bottom: 4px; }
+  .step p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0 22px; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border: 1px solid var(--hairline); }
+  th { background: var(--surface); color: var(--ink); font-weight: 600; }
+  td { color: #C6D0DD; }
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .callout { background: var(--accent-dim); border: 1px solid rgba(232,85,42,0.3);
+    border-radius: var(--radius); padding: 16px 20px; margin: 22px 0; }
+  .callout p { margin: 0; color: #E8B39B; font-size: 14.5px; }
+  .callout strong { color: var(--accent); }
+
+  .faq { border: 1px solid var(--hairline); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+  .faq summary { cursor: pointer; padding: 16px 20px; font-weight: 600; font-size: 15px;
+    background: var(--surface); list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; float: right; color: var(--accent); font-weight: 700; }
+  .faq[open] summary::after { content: '−'; }
+  .faq .faq-a { padding: 14px 20px 18px; color: #C6D0DD; font-size: 14.5px; border-top: 1px solid var(--hairline); }
+
+  .cta-box { margin: 56px auto 40px; max-width: 780px; text-align: center; background: linear-gradient(135deg, rgba(232,85,42,0.14), rgba(232,85,42,0.04));
+    border: 1px solid rgba(232,85,42,0.3); border-radius: 16px; padding: 48px 32px; }
+  .cta-box h2 { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800;
+    font-size: 32px; margin-bottom: 12px; border: none; padding: 0; }
+  .cta-box p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+  .cta-box .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--hairline); padding: 40px 0; margin-top: 40px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .f-brand { font-family: 'Barlow Condensed','Noto Sans SC',sans-serif; font-weight: 800; font-size: 17px; }
+  .f-brand span { color: var(--accent); }
+  .f-desc { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .foot a { color: var(--muted); text-decoration: none; font-size: 13px; margin-left: 18px; }
+  .foot a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><span class="cn">亞坤跨境</span> YAKUN</a>
+    <nav class="nav-links">
+      <a href="/">首页</a>
+      <a href="meta.html">Meta 广告</a>
+      <a href="tiktok.html" class="on">TikTok 广告</a>
+      <a href="/#services">服务</a>
+      <a href="/#cases">案例</a>
+      <a href="/#pricing">定价</a>
+      <a href="/#contact">联系</a>
+      <a class="btn btn-primary" href="/#contact" style="padding:9px 18px; font-size:13px;">免费咨询</a>
+    </nav>
+  </div>
+</header>
+
+<section class="article-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">首页</a> › TikTok 广告投放全指南</div>
+    <h1>TikTok 广告<br>投放<span class="hl">全指南</span></h1>
+    <p class="lead">TikTok 广告是 TikTok 平台上的付费推广系统，以短视频信息流为核心，通过算法把产品内容精准推给潜在买家，是中国工厂触达海外年轻消费群体、打造爆款产品最快的渠道。</p>
+    <div class="meta-note">更新日期：2026 年 8 月 ｜ 参考：TikTok for Business 官方文档</div>
+  </div>
+</section>
+
+<article class="article">
+  <h2>一、TikTok 广告是什么</h2>
+  <p><strong>TikTok 广告</strong>指在 TikTok 平台投放的付费内容，以原生短视频信息流广告为核心形态，穿插在用户的「为你推荐」视频流中。广告主通过 TikTok Ads Manager（广告管理平台）创建广告、设置定向和预算。</p>
+  <p>TikTok 全球月活跃用户超 15 亿，覆盖 150 多个国家和地区，用户以 18-34 岁为主。它的核心特点是<strong>创意驱动</strong>——一条好的短视频素材，往往比精准定向更决定广告效果。</p>
+  <p>对工厂来说，TikTok 广告的价值在于：<strong>用极具视觉冲击力的产品内容，在短时间内打爆一个产品</strong>，特别适合那些「看一眼就想买」的商品。</p>
+
+  <h2>二、TikTok 广告为什么值得投</h2>
+  <ul>
+    <li><strong>流量红利</strong>：TikTok 用户时长和增速领先，海外年轻消费者高度聚集</li>
+    <li><strong>算法推荐强</strong>：内容为王，一条好素材可以低成本撬动巨大自然流量</li>
+    <li><strong>爆发力强</strong>：爆款产品能在极短时间内获得海量曝光和询盘</li>
+    <li><strong>视觉转化好</strong>：产品演示、开箱、使用场景类视频天然适合短视频表达</li>
+  </ul>
+
+  <h2>三、TikTok vs Meta（Facebook），怎么选</h2>
+  <table>
+    <tr><th>对比项</th><th>TikTok 广告</th><th>Meta 广告</th></tr>
+    <tr><td>核心受众</td><td>18-34 岁年轻用户</td><td>全年龄段，B2B 采购商集中</td></tr>
+    <tr><td>内容形态</td><td>短视频为主，创意驱动</td><td>图文/视频/表单，形态多样</td></tr>
+    <tr><td>适合产品</td><td>快消、时尚、家居、小商品</td><td>工业品、家具、建材等 B2B</td></tr>
+    <tr><td>询盘类型</td><td>偏零售、小 B 买家</td><td>偏批发、大宗采购商</td></tr>
+    <tr><td>起量速度</td><td>爆款快、波动大</td><td>稳定、可持续放量</td></tr>
+  </table>
+  <p><strong>结论：</strong>消费类、视觉型产品优先 TikTok；B2B 工业品优先 Meta。<strong>两者搭配投放</strong>，覆盖不同买家群体，是效果最大化的组合。</p>
+
+  <h2>四、TikTok 广告开户流程（4 步）</h2>
+  <div class="step"><div class="no">1</div><div>
+    <h4>注册 TikTok for Business 账号</h4>
+    <p>访问 ads.tiktok.com，用企业邮箱注册 TikTok 广告账户，创建广告主账号。</p>
+  </div></div>
+  <div class="step"><div class="no">2</div><div>
+    <h4>完成企业认证</h4>
+    <p>提交营业执照、行业资质等信息完成企业资质认证，认证通过后才能正式投放。</p>
+  </div></div>
+  <div class="step"><div class="no">3</div><div>
+    <h4>绑定支付方式</h4>
+    <p>绑定信用卡或通过代理充值。TikTok 广告按 CPM/CPC 计费，需预充值。</p>
+  </div></div>
+  <div class="step"><div class="no">4</div><div>
+    <h4>创建广告系列并投放</h4>
+    <p>设置投放目标（流量、转化、询盘）、目标地区、预算和排期，上传素材开跑。</p>
+  </div></div>
+
+  <h2>五、TikTok 广告有哪些类型</h2>
+  <ul>
+    <li><strong>信息流广告（In-Feed Ads）</strong>：最常见的原生广告，出现在推荐流里，可跳转落地页或表单</li>
+    <li><strong>Spark Ads（达人原生广告）</strong>：用达人或自己账号的爆款视频加热投放，信任感强、转化高</li>
+    <li><strong>TopView（开屏广告）</strong>：打开 App 即见，曝光量大，适合品牌曝光，成本高</li>
+    <li><strong>商品购物广告（Product Shopping Ads）</strong>：直接挂商品链接，适合 TikTok Shop 带货</li>
+    <li><strong>品牌挑战赛</strong>：以话题挑战形式引爆传播，适合预算充足的品牌</li>
+  </ul>
+  <p>工厂获客，<strong>信息流广告 + Spark Ads</strong>组合最实用：信息流起量测试，跑出爆款素材后投 Spark Ads 放大。</p>
+
+  <h2>六、适合哪些产品</h2>
+  <ul>
+    <li><strong>快消与生活好物</strong>：家居、厨房、收纳、创意小商品——「看一眼就想买」</li>
+    <li><strong>时尚与美妆</strong>：服装、配饰、美妆工具——视觉表现力强</li>
+    <li><strong>户外与运动</strong>：露营、健身、渔具——场景感视频易爆</li>
+    <li><strong>3C 数码配件</strong>：手机配件、小家电——功能演示直观</li>
+    <li><strong>不太适合</strong>：决策链极长的大宗工业设备，这类更适合 Meta 的 B2B 定向</li>
+  </ul>
+
+  <h2>七、TikTok 投放策略：素材是灵魂</h2>
+  <ul>
+    <li><strong>素材为王</strong>：TikTok 广告 80% 效果由素材决定，把精力放在视频上</li>
+    <li><strong>前 3 秒抓眼球</strong>：开头直接展示产品最惊艳的画面或痛点，别铺垫</li>
+    <li><strong>原生感</strong>：广告要长得像普通用户视频，硬广感越弱效果越好</li>
+    <li><strong>多素材测试</strong>：一次上 5-10 条不同角度素材，跑出数据后集中加投爆款</li>
+    <li><strong>本地化</strong>：文案、配音、字幕用目标市场的语言（英语、西语、东南亚小语种）</li>
+    <li><strong>再营销</strong>：对看过视频没转化的用户二次投放，成本更低</li>
+  </ul>
+
+  <h2>八、避坑指南</h2>
+  <ul>
+    <li>素材避免侵权音乐、违规内容、夸大宣传，TikTok 审核严格</li>
+    <li>新账户先小额测试，跑稳了再放量，避免一上来大额充值被风控</li>
+    <li>选品注意平台政策和目标市场合规（如欧盟 CE 认证等）</li>
+    <li>爆款素材被限流时，及时换素材迭代，而不是硬投</li>
+  </ul>
+
+  <h2>九、常见问题 FAQ</h2>
+  <details class="faq"><summary>TikTok 广告开户要花钱吗？</summary>
+    <div class="faq-a">开户免费。费用是广告消耗 + 代运营服务费。广告需预充值，按 CPM（千次曝光）或 CPC（点击）计费。</div></details>
+  <details class="faq"><summary>TikTok 广告一天投多少合适？</summary>
+    <div class="faq-a">建议测试期每天 ¥100-300，跑 3-7 天看数据。爆款素材再加投，没有固定标准。</div></details>
+  <details class="faq"><summary>工厂产品适合投 TikTok 吗？</summary>
+    <div class="faq-a">快消、家居、户外、小家电等视觉型产品非常适合；大宗工业设备更适合 Meta 的 B2B 定向。</div></details>
+  <details class="faq"><summary>TikTok 和 Meta 广告能一起投吗？</summary>
+    <div class="faq-a">能，而且推荐。两者受众互补：TikTok 覆盖年轻消费者，Meta 覆盖全年龄段和 B2B 采购商。</div></details>
+  <details class="faq"><summary>多久能见效？</summary>
+    <div class="faq-a">素材好当天就能起量出单，但稳定出单通常需要 1-2 周测试和优化。</div></details>
+  <details class="faq"><summary>自己投还是找代运营？</summary>
+    <div class="faq-a">TikTok 对素材要求高，没经验容易白烧钱。有外贸投放经验的代运营（如亞坤跨境）能帮你省掉大量试错成本。</div></details>
+</article>
+
+<div class="wrap">
+  <div class="cta-box">
+    <h2>想让产品在 TikTok 上爆单？</h2>
+    <p>告诉我们你的产品和目标市场，免费出一套 TikTok 广告投放方案。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/#contact">获取免费出海方案 →</a>
+      <a class="btn btn-ghost" href="https://wa.me/8613285287302" target="_blank" rel="noopener">WhatsApp 咨询</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="f-brand"><span>亞坤跨境</span> YAKUN</div>
+      <div class="f-desc">连接中国制造到全球买家 · Connecting Chinese Manufacturing to Global Markets</div>
+    </div>
+    <div>
+      <a href="/#services">服务</a>
+      <a href="meta.html">Meta 广告</a>
+      <a href="tiktok.html">TikTok 广告</a>
+      <a href="/#contact">联系</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
